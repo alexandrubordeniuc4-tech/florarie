@@ -70,6 +70,7 @@
             filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.2));
             margin-top: 2px;
             display: inline-block;
+            white-space: nowrap; /* Запрет переноса на две строки */
         }
         
         .main-nav { display: flex; gap: 30px; align-items: center; }
@@ -270,13 +271,26 @@
         }
 
         @media (max-width: 768px) {
-            header { flex-wrap: wrap; padding: 10px 5%; }
-            .header-left { flex: 1 1 50%; justify-content: flex-start; }
-            .header-right { flex: 1 1 50%; justify-content: flex-end; }
-            .header-center { flex: 1 1 100%; order: 3; margin-top: 15px; overflow-x: auto; padding-bottom: 5px; justify-content: center; }
-            .main-nav { gap: 15px; }
-            .logo-text { font-size: 20px; }
-            .logo-img { height: 40px; width: 40px; }
+            /* Оптимизированная шапка для мобильных */
+            header { padding: 12px 5%; }
+            .header-left { flex: 0 0 auto; justify-content: flex-start; }
+            .header-right { flex: 1; justify-content: flex-end; }
+            
+            /* Логотип на мобильных */
+            .logo-text { font-size: 16px; letter-spacing: 1px; }
+            .logo-img { height: 35px; width: 35px; }
+            .logo-container { gap: 8px; }
+            
+            /* Кнопки языков и корзины */
+            .header-controls { gap: 12px; }
+            .lang-btn { font-size: 11px; }
+            .cart-btn { font-size: 13px; }
+            .cart-btn svg { width: 18px; height: 18px; }
+            
+            /* Навигационное меню */
+            .header-center { flex: 1 1 100%; order: 3; margin-top: 10px; overflow-x: auto; padding-bottom: 5px; justify-content: flex-start; }
+            .main-nav { gap: 15px; width: 100%; justify-content: space-between; }
+            .nav-link { font-size: 10px; white-space: nowrap; }
 
             .hero { height: 75vh; }
             .hero h1 { font-size: 38px; }
