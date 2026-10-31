@@ -30,14 +30,13 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- PRELOADER (ЦВЕТЫ БЛИЖЕ К БУКЕТУ) --- */
+        /* --- PRELOADER --- */
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(15px); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s; }
         .floral-loader { position: relative; width: 120px; height: 120px; margin-bottom: 20px; }
         .bouquet-svg { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 85px; height: 85px; color: var(--primary); z-index: 2; }
         .bouquet-svg path { stroke-dasharray: 300; stroke-dashoffset: 300; animation: drawPath 1.2s ease forwards; stroke-linecap: round; stroke-linejoin: round; }
         @keyframes drawPath { to { stroke-dashoffset: 0; } }
         
-        /* Измененные позиции (top) чтобы быть ближе к упаковке */
         .loader-flower { position: absolute; width: 30px; height: 30px; color: var(--primary); opacity: 0; transform: scale(0) rotate(-20deg); animation: bloom 1s ease forwards; z-index: 1; }
         .f1 { left: 20px; top: 38px; animation-delay: 0.5s; }
         .f2 { left: 45px; top: 22px; animation-delay: 0.7s; width: 35px; height: 35px; color: #d4b57a; }
@@ -55,7 +54,23 @@
         
         .logo-container { display: flex; align-items: center; gap: 15px; text-decoration: none; }
         .logo-img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--primary); letter-spacing: 1px; }
+        
+        /* --- ПРЕМИАЛЬНАЯ ТИПОГРАФИКА В СТИЛЕ 3D-ЗОЛОТА --- */
+        .logo-text { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 28px; 
+            font-weight: 700; 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            /* Насыщенный золотой градиент, имитирующий металл */
+            background: linear-gradient(to bottom, #fceabb 0%, #f8b500 50%, #b37d00 51%, #fceabb 100%);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            /* Добавляем легкую тень, чтобы отделить текст и придать объем */
+            filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.2));
+            margin-top: 2px;
+            display: inline-block;
+        }
         
         .main-nav { display: flex; gap: 30px; align-items: center; }
         .nav-link { color: var(--text-dark); text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; position: relative; padding-bottom: 5px; transition: color 0.3s; }
@@ -77,7 +92,6 @@
         .hero-content { position: relative; z-index: 1; color: var(--white); padding: 0 8%; max-width: 800px; }
         .hero-overline { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: #eee; }
         .hero h1 { font-size: 60px; margin-bottom: 20px; line-height: 1.1; color: var(--white); text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .hero p { font-size: 16px; margin-bottom: 40px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.5); max-width: 450px; }
         .btn-main { background-color: var(--accent); color: var(--white); border: none; padding: 15px 32px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
         .btn-main:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(168, 123, 125, 0.4); }
         .hero-delivery-info { font-size: 12px; margin-top: 20px; opacity: 0.9; font-weight: 500; text-shadow: 0 2px 5px rgba(0,0,0,0.5); letter-spacing: 0.5px;}
@@ -112,7 +126,6 @@
 
         .grid { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 10px 0 30px 0; scrollbar-width: none; }
         .grid::-webkit-scrollbar { display: none; }
-        /* По умолчанию grid-mode это 5 или 6 колонок на десктопе */
         .grid.grid-mode { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; overflow-x: visible; scroll-snap-type: none; }
         
         .product-card { background: transparent; display: flex; flex-direction: column; cursor: pointer; transition: 0.3s; flex: 0 0 calc(20% - 16px); scroll-snap-align: start; min-width: 220px; }
@@ -174,9 +187,6 @@
         .gallery-item:hover img { transform: scale(1.08); }
         .gallery-item::after { content: '🔍'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; opacity: 0; transition: 0.3s; }
         .gallery-item:hover::after { opacity: 1; }
-        .insta-link-wrap { margin-top: 40px; }
-        .insta-link { color: var(--text-dark); text-decoration: none; font-size: 14px; font-weight: 500; border-bottom: 1px solid var(--text-dark); padding-bottom: 2px; transition: 0.3s; }
-        .insta-link:hover { color: var(--primary); border-color: var(--primary); }
 
         /* --- LIGHTBOX --- */
         .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
@@ -198,7 +208,6 @@
         .modal-close:hover { color: var(--text-dark); }
         .modal-details h3 { font-size: 26px; margin-bottom: 15px; color: var(--text-dark); }
         .modal-desc { font-size: 13px; color: var(--text-light); margin-bottom: 25px; }
-        .size-selector select { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 13px; outline: none; margin-bottom: 25px; }
         .modal-price-display { font-size: 24px; font-weight: 600; color: var(--primary); font-family: 'Montserrat', sans-serif; margin-bottom: 25px; }
 
         .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; }
@@ -210,11 +219,14 @@
         .cart-items { flex-grow: 1; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
         .cart-empty { text-align: center; color: var(--text-light); margin-top: 30px; font-size: 16px; }
         .cart-empty svg { width: 60px; height: 60px; color: #ddd; margin-bottom: 15px; }
-        .cart-item { display: flex; align-items: center; gap: 15px; background: var(--white); padding: 12px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        
+        /* --- ЭСТЕТИЧНАЯ АНИМАЦИЯ ДЛЯ УДАЛЕНИЯ --- */
+        .cart-item { display: flex; align-items: center; gap: 15px; background: var(--white); padding: 12px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); max-height: 200px; opacity: 1; transform: scale(1); overflow: hidden;}
+        .cart-item.removing { opacity: 0; transform: scale(0.85) translateY(-10px); max-height: 0; padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0; border: none; pointer-events: none;}
+        
         .cart-item img { width: 65px; height: 65px; border-radius: 6px; object-fit: cover; }
         .cart-item-details { flex-grow: 1; }
         .cart-item-title { font-size: 14px; font-weight: 600; color: var(--text-dark); font-family: 'Montserrat', sans-serif;}
-        .cart-item-size { font-size: 12px; color: var(--text-light); }
         .cart-item-price { font-weight: 700; color: var(--primary); font-size: 15px; }
         .cart-item-remove { background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 22px; padding: 0 10px;}
         .cart-total-box { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--text-dark); }
@@ -232,7 +244,7 @@
         .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; max-width: 1200px; margin: 0 auto; margin-bottom: 50px; }
         .footer-col { flex: 1; min-width: 250px; }
         .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; color: var(--primary); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600;}
-        .footer-logo img { width: 45px; height: 45px; border-radius: 50%; }
+        .footer-logo img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover;}
         .footer-col h4 { color: var(--white); font-size: 15px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .footer-col p { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .footer-map iframe { width: 100%; height: 180px; border-radius: 10px; border: none; }
@@ -258,7 +270,6 @@
         }
 
         @media (max-width: 768px) {
-            /* Шапка */
             header { flex-wrap: wrap; padding: 10px 5%; }
             .header-left { flex: 1 1 50%; justify-content: flex-start; }
             .header-right { flex: 1 1 50%; justify-content: flex-end; }
@@ -267,32 +278,27 @@
             .logo-text { font-size: 20px; }
             .logo-img { height: 40px; width: 40px; }
 
-            /* Главный экран */
             .hero { height: 75vh; }
             .hero h1 { font-size: 38px; }
             .hero p { font-size: 14px; }
             .btn-main { padding: 12px 24px; font-size: 12px; }
 
-            /* Категории круги */
             .categories-circle { padding: 40px 5% 20px; gap: 15px; justify-content: flex-start; }
             .cat-item { min-width: 90px; }
             .cat-img { width: 90px; height: 90px; border-width: 2px;}
             .cat-name { font-size: 13px; }
 
-            /* Товары */
             .section-header-wrap { flex-direction: column; align-items: flex-start; gap: 10px; }
             .section-header-titles h2 { font-size: 24px; }
             .filters-clean { width: 100%; justify-content: flex-start; }
-            .carousel-btn { display: none; } /* Скрываем стрелки, оставляем свайп */
+            .carousel-btn { display: none; } 
             
-            /* Почему мы */
             .features-wrapper { flex-direction: column; margin: 60px 0; }
             .features-img-side { min-height: 250px; }
             .features-img-side::after { background: linear-gradient(to bottom, transparent, var(--bg-color)); top: auto; width: 100%; height: 150px; }
             .features-content-side { padding: 40px 5%; }
             .features-grid-clean { grid-template-columns: 1fr; gap: 25px; }
 
-            /* Модалки и корзина */
             .cart-container { flex-direction: column; width: 100%; height: 100%; border-radius: 0; max-height: 100vh; }
             .cart-left, .cart-right { padding: 20px; }
             .modal-content { flex-direction: column; width: 95%; max-height: 90vh; }
@@ -302,13 +308,10 @@
             .modal-close { top: 10px; right: 15px; color: var(--text-dark); }
             .form-row { flex-direction: column; }
             
-            /* Футер */
             .footer-content { flex-direction: column; gap: 30px; }
         }
 
-        /* Мелкие телефоны (iPhone SE и т.д.) */
         @media (max-width: 500px) {
-            /* Товары в 2 колонки */
             .grid.grid-mode { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .product-card { min-width: 150px; }
             .img-wrapper { height: 180px; padding: 10px; margin-bottom: 8px;}
@@ -316,7 +319,6 @@
             .product-price { font-size: 13px; margin-bottom: 8px;}
             .btn-card { font-size: 11px; padding: 8px; }
             
-            /* Галерея в 2 колонки */
             .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px;}
         }
     </style>
@@ -345,8 +347,9 @@
     <header>
         <div class="header-left">
             <a href="#" class="logo-container">
-                <img src="5283194917142338407_121.jpg" alt="CAB Flowers Logo" class="logo-img">
-                <span class="logo-text">CAB Flowers</span>
+                <!-- НОВЫЙ ЛОГОТИП -->
+                <img src="5418096446885538381_121.jpg" alt="CAB Flowers Logo" class="logo-img">
+                <span class="logo-text">CAB FLOWERS</span>
             </a>
         </div>
         <div class="header-center">
@@ -377,11 +380,10 @@
         <div class="hero-content">
             <span class="hero-overline" data-ro="FLORI PROASPETE • ARANJAMENTE DE AUTOR • LIVRARE ÎN IAȘI" data-en="FRESH FLOWERS • DESIGNER BOUQUETS • CITY DELIVERY">FLORI PROASPETE • ARANJAMENTE DE AUTOR • LIVRARE ÎN IAȘI</span>
             <h1 data-ro="Flori care vorbesc<br>pentru tine" data-en="Flowers that speak<br>for you">Flori care vorbesc<br>pentru tine</h1>
-            <p data-ro="Oferiți emoții prin flori. Creăm buchete pentru momente speciale și doar pentru o zi bună." data-en="Gift emotions through flowers. We create bouquets for special moments and just for a good day.">Oferiți emoții prin flori. Creăm buchete pentru momente speciale și doar pentru o zi bună.</p>
             <button class="btn-main" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
                 <span data-ro="Mergi la catalog" data-en="Go to catalog">Mergi la catalog</span> &rarr;
             </button>
-            <p class="hero-delivery-info" data-ro="✨ Livrare gratuită în Iași pentru comenzile peste 300 RON" data-en="✨ Free delivery in Iași for orders over 300 RON">✨ Livrare gratuită în Iași pentru comenzile peste 300 RON</p>
+            <p class="hero-delivery-info" data-ro="✨ Livrare gratuită în Iași pentru comenzile peste 200 RON" data-en="✨ Free delivery in Iași for orders over 200 RON">✨ Livrare gratuită în Iași pentru comenzile peste 200 RON</p>
         </div>
     </section>
 
@@ -413,7 +415,7 @@
         </div>
     </section>
 
-    <!-- ТОВАРЫ (5 ФОТО, удалены Mix и Cutie 1) -->
+    <!-- ТОВАРЫ -->
     <div class="products-section reveal" id="shop">
         <div class="section-header-wrap">
             <div class="section-header-titles">
@@ -433,7 +435,6 @@
             
             <div class="grid" id="product-grid">
                 
-                <!-- 1. Buchet de bujori -->
                 <div class="product-card" data-category="buchete">
                     <div class="img-wrapper" onclick="openModal('Buchet de bujori / Peony Bouquet', 350, 'bujori.jpg')">
                         <button class="heart-btn">♡</button>
@@ -446,7 +447,6 @@
                     </div>
                 </div>
 
-                <!-- 2. Buchet Trandafiri -->
                 <div class="product-card" data-category="buchete">
                     <div class="img-wrapper" onclick="openModal('Buchet Trandafiri / Roses Bouquet', 250, 'trandafiri.jpg')">
                         <button class="heart-btn">♡</button>
@@ -459,7 +459,6 @@
                     </div>
                 </div>
 
-                <!-- 3. Buchet Crizanteme -->
                 <div class="product-card" data-category="buchete">
                     <div class="img-wrapper" onclick="openModal('Buchet Crizanteme / Chrysanthemum Bouquet', 180, 'crizanteme.jpg')">
                         <button class="heart-btn">♡</button>
@@ -472,7 +471,6 @@
                     </div>
                 </div>
 
-                <!-- 4. Cutie cu flori 2 -->
                 <div class="product-card" data-category="cutii">
                     <div class="img-wrapper" onclick="openModal('Cutie cu flori (Roz) / Pink Flower Box', 320, 'cutie 2.jpg')">
                         <button class="heart-btn">♡</button>
@@ -485,7 +483,6 @@
                     </div>
                 </div>
 
-                <!-- 5. Buchet pentru mireasa -->
                 <div class="product-card" data-category="buchete">
                     <div class="img-wrapper" onclick="openModal('Buchet pentru mireasă / Bridal Bouquet', 500, 'mireasa.jpg')">
                         <button class="heart-btn">♡</button>
@@ -515,7 +512,7 @@
                     <p data-ro="Livrări de 2-3 ori pe săptămână" data-en="Deliveries 2-3 times a week">Livrări de 2-3 ori pe săptămână</p>
                 </div>
                 <div class="feature-item-clean">
-                    <svg class="feature-icon-clean" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    <svg class="feature-icon-clean" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
                     <h4 data-ro="Buchete de autor" data-en="Designer bouquets">Buchete de autor</h4>
                     <p data-ro="Compoziții unice de la floriștii noștri" data-en="Unique compositions from our florists">Compoziții unice de la floriștii noștri</p>
                 </div>
@@ -537,7 +534,7 @@
     <div class="events-banner reveal" id="events">
         <h3 data-ro="Aranjamente & Evenimente" data-en="Arrangements & Events">Aranjamente & Evenimente</h3>
         <p data-ro="Nunți, botezuri sau petreceri private în Iași? Creăm un design floral unic, adaptat viziunii tale." data-en="Weddings, baptisms, or private parties in Iași? We create a unique floral design tailored to your vision.">
-           Nunți, botezuri sau petreceri private în Iași? Creăm un design floral unic, adaptat viziunii tale.
+            Nunți, botezuri sau petreceri private în Iași? Creăm un design floral unic, adaptat viziunii tale.
         </p>
         <button class="btn-main" onclick="requestQuote()" data-ro="Cere o Ofertă Personalizată" data-en="Request a Custom Quote">Cere o Ofertă Personalizată</button>
     </div>
@@ -589,10 +586,6 @@
                 <img src="5283194917142338768_121.jpg" alt="Gallery 5">
             </div>
         </div>
-        
-        <div class="insta-link-wrap">
-            <a href="#" class="insta-link" data-ro="Urmărește-ne pe Instagram (@cabflowers.iasi)" data-en="Follow us on Instagram (@cabflowers.iasi)">Urmărește-ne pe Instagram (@cabflowers.iasi)</a>
-        </div>
     </div>
 
     <!-- LIGHTBOX ДЛЯ ГАЛЕРЕИ -->
@@ -605,17 +598,10 @@
     <div id="product-modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <div class="modal-img-col"><img id="modal-img" src="" alt="Product Image" id="animated-source"></div>
+            <div class="modal-img-col"><img id="modal-img" src="" alt="Product Image"></div>
             <div class="modal-details">
                 <h3 id="modal-title">Nume Produs</h3>
                 <p class="modal-desc" id="modal-desc" data-ro="Compoziție florală premium, creată manual cu dragoste de floriștii noștri." data-en="Premium floral composition, handcrafted with love by our florists.">Compoziție florală premium...</p>
-                <div class="size-selector">
-                    <select id="modal-size" onchange="updateModalPrice()">
-                        <option value="Standard" data-mult="1" data-ro="Standard" data-en="Standard">Standard</option>
-                        <option value="Premium" data-mult="1.5" data-ro="Premium (+50%)" data-en="Premium (+50%)">Premium (+50%)</option>
-                        <option value="Deluxe" data-mult="2" data-ro="Deluxe (Dublu)" data-en="Deluxe (Double)">Deluxe (Dublu)</option>
-                    </select>
-                </div>
                 <div class="modal-price-display"><span id="modal-price-val">0</span> RON</div>
                 
                 <button class="btn-main" style="width: 100%; justify-content:center;" onclick="addFromModal(event)" data-ro="Adaugă în Coș" data-en="Add to Cart">Adaugă în Coș</button>
@@ -643,21 +629,28 @@
                     <div class="checkout-form">
                         <input type="text" id="name" placeholder="Numele tău / Your Name" required>
                         <input type="tel" id="phone" placeholder="Telefon / Phone Number" required>
+                        
+                        <!-- Выбор способа доставки с изящными эмодзи -->
+                        <select id="delivery-method" onchange="toggleAddressField()" style="font-weight: 600; color: var(--primary);">
+                            <option value="livrare" data-ro="✨🛵 Livrare la adresă" data-en="✨🛵 Delivery to address">✨🛵 Livrare la adresă</option>
+                            <option value="ridicare" data-ro="🛍️ Ridicare personală" data-en="🛍️ Personal pickup">🛍️ Ridicare personală</option>
+                        </select>
+                        
                         <input type="text" id="address" placeholder="Adresa în Iași / Address in Iași" required>
+                        
+                        <!-- ПОЛЯ ТОЧНОЙ ДАТЫ И ТОЧНОГО ВРЕМЕНИ -->
                         <div class="form-row">
                             <input type="date" id="date" required>
-                            <select id="time">
-                                <option value="09:00 - 12:00">09:00 - 12:00</option>
-                                <option value="12:00 - 15:00">12:00 - 15:00</option>
-                                <option value="15:00 - 18:00">15:00 - 18:00</option>
-                            </select>
+                            <!-- Input time для точного времени -->
+                            <input type="time" id="time" min="08:00" max="19:00" required style="font-family: 'Montserrat', sans-serif;">
                         </div>
                         <textarea id="card-message" rows="3" placeholder="Mesaj pentru felicitare / Card message"></textarea>
                         
-                        <button class="btn-main" style="width: 100%; justify-content:center; margin-top:10px;" onclick="submitOrder()" data-ro="Trimite Comanda" data-en="Submit Order">Trimite Comanda</button>
+                        <!-- Динамическая кнопка, меняющаяся в зависимости от доставки/самовывоза -->
+                        <button id="btn-submit-order" class="btn-main" style="width: 100%; justify-content:center; margin-top:10px;" onclick="submitOrder()" data-ro="Trimite Comanda" data-en="Submit Order">Trimite Comanda</button>
                         
                         <div class="trust-badges">
-                            <span data-ro="🎁 Livrare gratuită > 300 RON" data-en="🎁 Free delivery > 300 RON">🎁 Livrare gratuită > 300 RON</span>
+                            <span data-ro="🎁 Livrare gratuită > 200 RON" data-en="🎁 Free delivery > 200 RON">🎁 Livrare gratuită > 200 RON</span>
                         </div>
                         <div class="trust-badges" style="margin-top: 5px;">
                             <span data-ro="🔒 Plată securizată la livrare" data-en="🔒 Secure Payment on delivery">🔒 Plată securizată la livrare</span>
@@ -673,25 +666,40 @@
         <div class="footer-content">
             <div class="footer-col" style="flex: 1.2;">
                 <div class="footer-logo">
-                    <img src="5283194917142338407_121.jpg" alt="Logo">
+                    <!-- НОВЫЙ ЛОГОТИП -->
+                    <img src="5418096446885538381_121.jpg" alt="Logo">
                     CAB Flowers
                 </div>
                 <p data-ro="FLORI CU DRAGOSTE" data-en="FLOWERS WITH LOVE" style="font-size:10px; letter-spacing:2px; margin-top:-15px; margin-bottom:20px; margin-left: 60px; color:var(--primary);">FLORI CU DRAGOSTE</p>
-                <p>📍 <span data-ro="Palatul Culturii, Iași" data-en="Palace of Culture, Iași">Palatul Culturii, Iași</span></p>
-                <p>📞 +40 700 000 000</p>
-                <p>✉️ hello@cabflowers.ro</p>
+                <p>📍 <span data-ro="Strada Mihail Sturza nr. 18, Iași" data-en="Strada Mihail Sturza No. 18, Iași">Strada Mihail Sturza nr. 18, Iași</span></p>
+                <p>📞 0743 560 113</p>
+                
+                <!-- Соцсети SVG Иконки -->
+                <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px; font-size: 14px; font-weight: 500;">
+                    <a href="https://www.instagram.com/cab.flowers?rpxt=MWE1a2N0NmMzMmhvbQ==" target="_blank" style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--primary)'">
+                        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg> 
+                        Instagram
+                    </a>
+                    <a href="https://www.facebook.com/share/19mQfRbaVk/?mibextid=wwXIfr" target="_blank" style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--primary)'">
+                        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+                        Facebook
+                    </a>
+                    <a href="https://www.tiktok.com/@cab.flowers?_r=1&_t=ZS-9B15JMdqfsA" target="_blank" style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--primary)'">
+                        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.71a6.34 6.34 0 0011.14 4.15c.05-.08.1-.17.15-.25V11.58a8.75 8.75 0 004.3 1.15V9.3a5.3 5.3 0 01-1-2.61z"/></svg>
+                        TikTok
+                    </a>
+                </div>
             </div>
             
             <div class="footer-col">
                 <h4 data-ro="Program" data-en="Working Hours">Program</h4>
-                <p><span data-ro="Luni - Vineri:" data-en="Mon - Fri:">Luni - Vineri:</span> 09:00 - 18:00</p>
-                <p><span data-ro="Sâmbătă:" data-en="Saturday:">Sâmbătă:</span> 10:00 - 15:00</p>
+                <p><span data-ro="Luni - Sâmbătă:" data-en="Mon - Sat:">Luni - Sâmbătă:</span> 08:00 - 19:00</p>
                 <p><span data-ro="Duminică:" data-en="Sunday:">Duminică:</span> <span data-ro="Închis" data-en="Closed">Închis</span></p>
             </div>
 
             <div class="footer-col footer-map" style="flex: 1.5;">
                 <h4 data-ro="Locație" data-en="Location">Locație</h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.177435165158!2d27.58334431560882!3d47.15781197915598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cafb61af5ef507%3A0x95f1e37c73c23e74!2sPalatul%20Culturi!5e0!3m2!1sen!2sro!4v1689000000000!5m2!1sen!2sro" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://maps.google.com/maps?q=Strada%20Mihail%20Sturza%20nr%2018%2C%20Iasi&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
         <div class="footer-bottom">
@@ -699,8 +707,8 @@
         </div>
     </footer>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/40700000000" class="whatsapp-float" target="_blank">
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/40743560113" class="whatsapp-float" target="_blank">
         <svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor"><path d="M16 2.5a13.4 13.4 0 00-11.4 20.3L2 29.5l6.9-2.5A13.4 13.4 0 1016 2.5zm7.6 19.3c-.3.9-1.8 1.6-2.5 1.7-.6.1-1.4.3-4.3-1-3.5-1.5-5.8-5-6-5.3-.2-.2-1.4-1.9-1.4-3.6 0-1.7.9-2.6 1.2-2.9.3-.3.7-.4 1-.4h.3c.3 0 .7.1 1 .7.3.8.9 2.1 1 2.3.1.2.1.4 0 .6-.1.2-.2.3-.4.6-.2.2-.4.4-.2.7.2.3.8 1.5 1.9 2.4 1.4 1.2 2.6 1.6 2.9 1.7.3.1.5.1.7-.1.2-.2.8-1 1-1.3.2-.3.5-.2.8-.1.3.1 1.8.8 2.1 1 .3.1.5.2.6.4.1.2.1.7-.1 1.6z"/></svg>
     </a>
 
@@ -732,20 +740,19 @@
             }, 1200); 
         });
 
-        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
-        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
         document.getElementById('date').min = new Date().toISOString().split("T")[0];
 
         const textAssets = {
             cartEmpty: { ro: "Coșul este gol!", en: "Cart is empty!" },
-            fillFields: { ro: "Completați toate datele!", en: "Fill in all details!" },
+            fillFields: { ro: "Completați toate datele obligatorii!", en: "Fill in all required details!" },
             orderSuccess: { ro: "Comandă primită! Vă contactăm curând.", en: "Order received! We will contact you soon." },
-            quoteAlert: { ro: "Contactați-ne pe WhatsApp pentru o ofertă personalizată pentru evenimentul dvs.!", en: "Contact us on WhatsApp for a custom quote for your event!" },
             placeholderName: { ro: "Numele tău", en: "Your Name" },
             placeholderPhone: { ro: "Telefon", en: "Phone Number" },
             placeholderAddress: { ro: "Adresa în Iași", en: "Address in Iași" },
             placeholderMsg: { ro: "Mesaj felicitare", en: "Card message" },
-            addedToast: { ro: "Produs adăugat în coș!", en: "Product added to cart!" }
+            addedToast: { ro: "Produs adăugat în coș!", en: "Product added to cart!" },
+            btnDelivery: { ro: "Trimite Comanda", en: "Submit Order" },
+            btnPickup: { ro: "Rezervă și Ridică", en: "Reserve and Pick Up" }
         };
 
         let currentLang = 'ro';
@@ -768,6 +775,15 @@
                 const fullTitle = document.getElementById('modal-title').getAttribute('data-full-title');
                 document.getElementById('modal-title').innerText = fullTitle.split(' / ')[currentLang === 'ro' ? 0 : 1];
             }
+            
+            const method = document.getElementById('delivery-method').value;
+            const submitBtn = document.getElementById('btn-submit-order');
+            if (method === 'ridicare') {
+                submitBtn.innerText = textAssets.btnPickup[currentLang];
+            } else {
+                submitBtn.innerText = textAssets.btnDelivery[currentLang];
+            }
+            
             updateCartUI(); 
         }
 
@@ -824,32 +840,35 @@
             document.getElementById('gallery-lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
+        
         function closeGallery() {
             document.getElementById('gallery-lightbox').classList.remove('open');
             document.body.style.overflow = '';
         }
 
+        function requestQuote() {
+            const message = "Bună, aș dori să primesc o ofertă personalizată pentru evenimentul meu.";
+            const whatsappUrl = `https://wa.me/40743560113?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         let currentModalBasePrice = 0; let currentModalTitle = ""; let currentModalImg = "";
+        
         function openModal(title, basePrice, imgSrc) {
             currentModalTitle = title; currentModalBasePrice = basePrice; currentModalImg = imgSrc;
             document.getElementById('modal-title').setAttribute('data-full-title', title);
             document.getElementById('modal-title').innerText = title.split(' / ')[currentLang === 'ro' ? 0 : 1];
             document.getElementById('modal-img').src = imgSrc;
-            document.getElementById('modal-size').value = "Standard";
-            updateModalPrice(); 
+            document.getElementById('modal-price-val').innerText = basePrice;
             document.getElementById('product-modal').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
+        
         function closeModal(e) { 
             if (!e || e.target.classList.contains('modal-overlay')) { 
                 document.getElementById('product-modal').classList.remove('open'); 
                 document.body.style.overflow = ''; 
             } 
-        }
-        function updateModalPrice() {
-            const select = document.getElementById('modal-size');
-            const finalPrice = Math.round(currentModalBasePrice * parseFloat(select.options[select.selectedIndex].getAttribute('data-mult')));
-            document.getElementById('modal-price-val').innerText = finalPrice;
         }
 
         // --- АНИМАЦИЯ ПОЛЕТА В КОРЗИНУ ---
@@ -899,12 +918,9 @@
         }
 
         let cart = [];
+        
         function addFromModal(event) {
-            const select = document.getElementById('modal-size');
-            const finalPrice = parseInt(document.getElementById('modal-price-val').innerText);
-            const name = `${currentModalTitle} [Size: ${select.value}]`;
-            
-            cart.push({ name: name, price: finalPrice, img: currentModalImg });
+            cart.push({ name: currentModalTitle, price: currentModalBasePrice, img: currentModalImg });
             
             const imgEl = document.getElementById('modal-img');
             const rect = imgEl.getBoundingClientRect();
@@ -914,7 +930,24 @@
             showToast(textAssets.addedToast[currentLang]);
         }
 
-        function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
+        // --- УЛУЧШЕННАЯ ПЛАВНАЯ АНИМАЦИЯ ПРИ УДАЛЕНИИ ---
+        function removeFromCart(index) {
+            const itemsContainer = document.getElementById('cart-items');
+            const itemElement = itemsContainer.children[index];
+            
+            if (itemElement) {
+                itemElement.classList.add('removing');
+                
+                // Физически удаляем из массива и UI только после окончания анимации перехода (300 мс)
+                setTimeout(() => {
+                    cart.splice(index, 1);
+                    updateCartUI();
+                }, 300);
+            } else {
+                cart.splice(index, 1);
+                updateCartUI();
+            }
+        }
 
         function updateCartUI() {
             const container = document.getElementById('cart-items'); 
@@ -925,15 +958,13 @@
             } else {
                 cart.forEach((item, index) => {
                     total += item.price; 
-                    let displayTitle = item.name.includes('[Size:') ? item.name.split(' [Size: ')[0].split(' / ')[currentLang === 'ro' ? 0 : 1] : item.name.split(' / ')[currentLang === 'ro' ? 0 : 1];
-                    let sizeText = item.name.includes('[Size:') ? (currentLang === 'ro' ? `Mărime: ${item.name.split(' [Size: ')[1].replace(']', '')}` : `Size: ${item.name.split(' [Size: ')[1].replace(']', '')}`) : "";
+                    let displayTitle = item.name.split(' / ')[currentLang === 'ro' ? 0 : 1];
                     
                     container.innerHTML += `
                         <div class="cart-item">
                             <img src="${item.img}" alt="Product">
                             <div class="cart-item-details">
                                 <div class="cart-item-title">${displayTitle}</div>
-                                <div class="cart-item-size">${sizeText}</div>
                                 <div class="cart-item-price">${item.price} RON</div>
                             </div>
                             <button class="cart-item-remove" onclick="removeFromCart(${index})">&times;</button>
@@ -952,25 +983,75 @@
         }
         
         function closeCart(e) { if (!e || e.target.id === 'cart-overlay') { toggleCart(); } }
+
+        // --- ФУНКЦИЯ ДЛЯ ПЕРЕКЛЮЧЕНИЯ ПОЛЯ АДРЕСА И КНОПКИ ---
+        function toggleAddressField() {
+            const method = document.getElementById('delivery-method').value;
+            const addressInput = document.getElementById('address');
+            const submitBtn = document.getElementById('btn-submit-order');
+            
+            if(method === 'ridicare') {
+                addressInput.style.display = 'none';
+                addressInput.value = ''; 
+                addressInput.removeAttribute('required');
+                submitBtn.innerText = textAssets.btnPickup[currentLang];
+                submitBtn.setAttribute('data-ro', textAssets.btnPickup.ro);
+                submitBtn.setAttribute('data-en', textAssets.btnPickup.en);
+            } else {
+                addressInput.style.display = 'block';
+                addressInput.setAttribute('required', 'true');
+                submitBtn.innerText = textAssets.btnDelivery[currentLang];
+                submitBtn.setAttribute('data-ro', textAssets.btnDelivery.ro);
+                submitBtn.setAttribute('data-en', textAssets.btnDelivery.en);
+            }
+        }
         
+        // --- ОБНОВЛЕННАЯ ФУНКЦИЯ ОТПРАВКИ ЗАКАЗА С ТОЧНЫМ ВРЕМЕНЕМ И ОГРАНИЧЕНИЯМИ ---
         function submitOrder() {
             if (cart.length === 0) return alert(textAssets.cartEmpty[currentLang]);
-            const name = document.getElementById('name').value, phone = document.getElementById('phone').value, address = document.getElementById('address').value, date = document.getElementById('date').value, time = document.getElementById('time').value;
-            if(!name || !phone || !address || !date) return alert(textAssets.fillFields[currentLang]);
             
-            let orderText = `✨ <b>COMANDĂ NOUĂ</b> ✨\n\n👤 <b>Client:</b> ${name}\n📞 <b>Telefon:</b> ${phone}\n📍 <b>Adresa:</b> ${address}\n📅 <b>Data:</b> ${date} (${time})\n✉️ <b>Felicitare:</b> <i>${document.getElementById('card-message').value || "-"}</i>\n\n🛍 <b>PRODUSE:</b>\n`;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const method = document.getElementById('delivery-method').value;
+            const address = document.getElementById('address').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            // Проверка обязательных полей
+            if(!name || !phone || !date || !time || (method === 'livrare' && !address)) {
+                return alert(textAssets.fillFields[currentLang]);
+            }
+
+            // Логическая валидация точного времени (не раньше 08:00 и не позже 19:00 по графику)
+            const chosenHour = parseInt(time.split(":")[0], 10);
+            if (chosenHour < 8 || chosenHour >= 19) {
+                const errorMsg = currentLang === 'ro' 
+                    ? "Ne pare rău, dar intervalul de livrare/ridicare este doar între orele 08:00 și 19:00!" 
+                    : "Sorry, but delivery/pickup time is only available between 08:00 and 19:00!";
+                return alert(errorMsg);
+            }
+            
+            const methodText = method === 'livrare' ? '✨🛵 Livrare la adresă' : '🛍️ Ridicare personală';
+            const addressText = method === 'livrare' ? address : 'Va ridica personal din magazin';
+            
+            let orderText = `✨ *COMANDĂ NOUĂ* ✨\n\n👤 *Client:* ${name}\n📞 *Telefon:* ${phone}\n📦 *Metoda:* ${methodText}\n📍 *Adresa:* ${addressText}\n📅 *Data & Ora:* ${date} la ora ${time}\n✉️ *Felicitare:* _${document.getElementById('card-message').value || "-"}_{"\n\n🛍 *PRODUSE:*\n"}`;
+            
             let total = 0;
             cart.forEach(item => {
-                const roName = item.name.split(' / ')[0].split(' [')[0];
-                const sizeMatch = item.name.match(/\[Size: (.*?)\]/);
-                orderText += `- ${roName} ${sizeMatch ? `(${sizeMatch[1]})` : ''} - ${item.price} RON\n`; total += item.price;
+                const roName = item.name.split(' / ')[0];
+                orderText += `- ${roName} - ${item.price} RON\n`; 
+                total += item.price;
             });
-            orderText += `\n💰 <b>TOTAL: ${total} RON</b>`;
+            orderText += `\n💰 *TOTAL: ${total} RON*`;
 
-            if(TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') { fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: orderText, parse_mode: 'HTML' }) }).catch(err => console.error(err)); }
-            alert(textAssets.orderSuccess[currentLang]);
+            const whatsappUrl = `https://wa.me/40743560113?text=${encodeURIComponent(orderText)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Очистка формы
             cart = []; updateCartUI(); toggleCart();
-            ['name', 'phone', 'address', 'date', 'card-message'].forEach(id => document.getElementById(id).value = '');
+            ['name', 'phone', 'address', 'date', 'time', 'card-message'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('delivery-method').value = 'livrare';
+            toggleAddressField();
         }
     </script>
 </body>
