@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAB Flowers | Florărie Premium Iași</title>
+    
+    <!-- SEO-база -->
+    <title>CAB Flowers | Florărie Iași | Livrare flori la domiciliu Iași</title>
+    <meta name="description" content="CAB Flowers - Florărie premium în Iași. Oferim livrare flori la domiciliu, buchete de autor, aranjamente și cutii florale proaspete pentru orice ocazie.">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     
+    <!-- Contentful SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+
     <style>
         :root {
             --primary: #c5a059; 
@@ -328,15 +335,19 @@
             .features-grid-clean { grid-template-columns: 1fr; gap: 25px; }
 
             /* Исправление мобильной корзины (скролл и расположение) */
-            .cart-modal { padding: 0; }
+            .cart-modal { 
+                padding: 0; 
+                align-items: flex-start;
+            }
             .cart-container { 
                 flex-direction: column; 
                 width: 100vw; 
-                height: 100vh; 
-                max-height: 100vh;
+                height: 100%; 
+                max-height: 100dvh;
                 border-radius: 0; 
                 overflow-y: auto; 
                 background: var(--card-bg);
+                -webkit-overflow-scrolling: touch;
             }
             .cart-left { 
                 flex: none; 
@@ -346,7 +357,7 @@
             }
             .cart-right { 
                 flex: none; 
-                padding: 0 20px 40px 20px; 
+                padding: 0 20px 100px 20px; 
                 background: transparent; 
                 overflow-y: visible;
             }
@@ -363,7 +374,6 @@
             .modal-desc { font-size: 13px; margin-bottom: 15px; }
             .modal-price-display { font-size: 22px; margin-bottom: 20px; }
             
-            /* Делаем крестик в белом кружочке, чтобы его было видно поверх фото */
             .modal-close { 
                 top: 10px; 
                 right: 10px; 
@@ -508,164 +518,9 @@
             <button class="carousel-btn carousel-prev" id="car-prev" onclick="scrollCarousel(-1)">&#10094;</button>
             
             <div class="grid" id="product-grid">
-                
-                <!-- Товар 1 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Aura&quot; / &quot;Aura&quot; Bouquet', 150, '1.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="1.jpg" alt="Buchet Aura">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Aura&quot;" data-en="&quot;Aura&quot; Bouquet">Buchet "Aura"</h4>
-                        <p class="product-price">150 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Aura&quot; / &quot;Aura&quot; Bouquet', 150, '1.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 2 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Elegance&quot; / &quot;Elegance&quot; Bouquet', 100, '2.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="2.jpg" alt="Buchet Elegance">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Elegance&quot;" data-en="&quot;Elegance&quot; Bouquet">Buchet "Elegance"</h4>
-                        <p class="product-price">100 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Elegance&quot; / &quot;Elegance&quot; Bouquet', 100, '2.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 3 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Tender&quot; / &quot;Tender&quot; Bouquet', 70, '3.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="3.jpg" alt="Buchet Tender">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Tender&quot;" data-en="&quot;Tender&quot; Bouquet">Buchet "Tender"</h4>
-                        <p class="product-price">70 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Tender&quot; / &quot;Tender&quot; Bouquet', 70, '3.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 4 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Sunrise&quot; / &quot;Sunrise&quot; Bouquet', 100, '4.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="4.jpg" alt="Buchet Sunrise">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Sunrise&quot;" data-en="&quot;Sunrise&quot; Bouquet">Buchet "Sunrise"</h4>
-                        <p class="product-price">100 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Sunrise&quot; / &quot;Sunrise&quot; Bouquet', 100, '4.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 5 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Premium&quot; / &quot;Premium&quot; Bouquet', 220, '5.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="5.jpg" alt="Buchet Premium">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Premium&quot;" data-en="&quot;Premium&quot; Bouquet">Buchet "Premium"</h4>
-                        <p class="product-price">220 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Premium&quot; / &quot;Premium&quot; Bouquet', 220, '5.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 6 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Harmony&quot; / &quot;Harmony&quot; Bouquet', 100, '6.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="6.jpg" alt="Buchet Harmony">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Harmony&quot;" data-en="&quot;Harmony&quot; Bouquet">Buchet "Harmony"</h4>
-                        <p class="product-price">100 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Harmony&quot; / &quot;Harmony&quot; Bouquet', 100, '6.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 7 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Charm&quot; / &quot;Charm&quot; Bouquet', 100, '7.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="7.jpg" alt="Buchet Charm">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Charm&quot;" data-en="&quot;Charm&quot; Bouquet">Buchet "Charm"</h4>
-                        <p class="product-price">100 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Charm&quot; / &quot;Charm&quot; Bouquet', 100, '7.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 8 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Blossom&quot; / &quot;Blossom&quot; Bouquet', 150, '8.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="8.jpg" alt="Buchet Blossom">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Blossom&quot;" data-en="&quot;Blossom&quot; Bouquet">Buchet "Blossom"</h4>
-                        <p class="product-price">150 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Blossom&quot; / &quot;Blossom&quot; Bouquet', 150, '8.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 9 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Magic&quot; / &quot;Magic&quot; Bouquet', 100, '9.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="9.jpg" alt="Buchet Magic">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Magic&quot;" data-en="&quot;Magic&quot; Bouquet">Buchet "Magic"</h4>
-                        <p class="product-price">100 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Magic&quot; / &quot;Magic&quot; Bouquet', 100, '9.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 10 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Passion&quot; / &quot;Passion&quot; Bouquet', 80, '10.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="10.jpg" alt="Buchet Passion">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Passion&quot;" data-en="&quot;Passion&quot; Bouquet">Buchet "Passion"</h4>
-                        <p class="product-price">80 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Passion&quot; / &quot;Passion&quot; Bouquet', 80, '10.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 11 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Spring&quot; / &quot;Spring&quot; Bouquet', 80, '11.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="11.jpg" alt="Buchet Spring">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Spring&quot;" data-en="&quot;Spring&quot; Bouquet">Buchet "Spring"</h4>
-                        <p class="product-price">80 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Spring&quot; / &quot;Spring&quot; Bouquet', 80, '11.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
-                <!-- Товар 12 -->
-                <div class="product-card" data-category="buchete">
-                    <div class="img-wrapper" onclick="openModal('Buchet &quot;Joy&quot; / &quot;Joy&quot; Bouquet', 100, '12.jpg')">
-                        <button class="heart-btn">♡</button>
-                        <img src="12.jpg" alt="Buchet Joy">
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title" data-ro="Buchet &quot;Joy&quot;" data-en="&quot;Joy&quot; Bouquet">Buchet "Joy"</h4>
-                        <p class="product-price">100 RON</p>
-                        <button class="btn-card" onclick="openModal('Buchet &quot;Joy&quot; / &quot;Joy&quot; Bouquet', 100, '12.jpg')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                    </div>
-                </div>
-
+                <!-- Товары будут динамически загружаться из Contentful -->
             </div>
+            
             <button class="carousel-btn carousel-next" id="car-next" onclick="scrollCarousel(1)">&#10095;</button>
         </div>
     </div>
@@ -818,10 +673,9 @@
                             </div>
                         </div>
 
-                        <!-- Выбор метода оплаты -->
                         <select id="payment-method" style="font-weight: 600; color: var(--primary);">
                             <option value="cash" data-ro="💵 Plată în numerar" data-en="💵 Cash payment">💵 Plată în numerar</option>
-                            <option value="card" data-ro="💳 Plată cu cardul" data-en="💳 Card payment">💳 Plată cu cardul</option>
+                            <option value="card" data-ro="💳 Plată cu cardul " data-en="💳 Card payment ">💳 Plată cu cardul </option>
                         </select>
 
                         <textarea id="card-message" rows="3" placeholder="Mesaj pentru felicitare / Card message"></textarea>
@@ -890,7 +744,7 @@
     </a>
 
     <script>
-        // Анимация при скролле
+        // Анимация при скролле и год в футере
         document.addEventListener("DOMContentLoaded", function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
@@ -904,7 +758,6 @@
                 observer.observe(el);
             });
             
-            // Динамический год
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
 
@@ -921,6 +774,67 @@
         });
 
         document.getElementById('date').min = new Date().toISOString().split("T")[0];
+
+        // --- CONTENTFUL ИНТЕГРАЦИЯ ---
+        const SPACE_ID = 'lokktsx1hk6x';
+        const ACCESS_TOKEN = 'CD11_BHcDqPO0m7zjNKaeG_kEvfBrMqPkkeTFFrBiYM';
+
+        const client = contentful.createClient({
+            space: SPACE_ID,
+            accessToken: ACCESS_TOKEN
+        });
+
+        async function loadProductsFromContentful() {
+            try {
+                const entries = await client.getEntries({ content_type: 'product' });
+                const grid = document.getElementById('product-grid');
+                grid.innerHTML = ''; 
+
+                entries.items.forEach(item => {
+                    const fields = item.fields;
+                    
+                    let imgUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; 
+                    if (fields.image && fields.image.fields && fields.image.fields.file) {
+                        imgUrl = 'https:' + fields.image.fields.file.url;
+                    }
+                    
+                    const titleRo = fields.titleRo || 'Fără nume';
+                    const titleEn = fields.titleEn || 'No name';
+                    const price = fields.price || 0;
+                    const category = fields.category || 'buchete';
+
+                    // Экранируем кавычки для onclick, чтобы не ломался скрипт
+                    const safeTitleRo = titleRo.replace(/'/g, "\\'");
+                    const safeTitleEn = titleEn.replace(/'/g, "\\'");
+
+                    const cardHtml = `
+                        <div class="product-card" data-category="${category}">
+                            <div class="img-wrapper" onclick="openModal('${safeTitleRo} / ${safeTitleEn}', ${price}, '${imgUrl}')">
+                                <button class="heart-btn">♡</button>
+                                <img src="${imgUrl}" alt="${titleRo}">
+                            </div>
+                            <div class="product-info">
+                                <h4 class="product-title" data-ro="${titleRo}" data-en="${titleEn}">${titleRo}</h4>
+                                <p class="product-price">${price} RON</p>
+                                <button class="btn-card" onclick="openModal('${safeTitleRo} / ${safeTitleEn}', ${price}, '${imgUrl}')" data-ro="În coș" data-en="Add to cart">În coș</button>
+                            </div>
+                        </div>
+                    `;
+                    grid.innerHTML += cardHtml;
+                });
+
+                // Применяем язык ко всем загруженным карточкам
+                changeLang(currentLang);
+
+            } catch (error) {
+                console.error("Ошибка при загрузке каталога:", error);
+                document.getElementById('product-grid').innerHTML = '<p style="padding: 20px;">Eroare la încărcarea catalogului din baza de date.</p>';
+            }
+        }
+
+        // Запускаем выгрузку из CMS
+        document.addEventListener('DOMContentLoaded', loadProductsFromContentful);
+        // ------------------------------
 
         const textAssets = {
             cartEmpty: { ro: "Coșul este gol!", en: "Cart is empty!" },
@@ -1051,7 +965,6 @@
             } 
         }
 
-        // --- АНИМАЦИЯ ПОЛЕТА В КОРЗИНУ ---
         function animateToCart(startX, startY, imgSrc) {
             const cartIcon = document.getElementById('cart-icon');
             const cartRect = cartIcon.getBoundingClientRect();
@@ -1208,7 +1121,7 @@
             
             const methodText = method === 'livrare' ? '✨🛵 Livrare la adresă' : '🛍️ Ridicare personală';
             const addressText = method === 'livrare' ? address : 'Va ridica personal din magazin';
-            const paymentText = payment === 'cash' ? '💵 Numerar' : '💳 Card';
+            const paymentText = payment === 'cash' ? '💵 Numerar' : '💳 Card ';
             
             let orderText = `✨ *COMANDĂ NOUĂ* ✨\n\n👤 *Client:* ${name}\n📞 *Telefon:* ${phone}\n📦 *Metoda:* ${methodText}\n📍 *Adresa:* ${addressText}\n📅 *Data & Ora:* ${date} la ora ${time}\n💳 *Achitare:* ${paymentText}\n✉️ *Felicitare:* _${document.getElementById('card-message').value || "-"}_{"\n\n🛍 *PRODUSE:*\n"}`;
             
