@@ -821,7 +821,7 @@
                         <!-- Выбор метода оплаты -->
                         <select id="payment-method" style="font-weight: 600; color: var(--primary);">
                             <option value="cash" data-ro="💵 Plată în numerar" data-en="💵 Cash payment">💵 Plată în numerar</option>
-                            <option value="card" data-ro="💳 Plată cu cardul (Link securizat)" data-en="💳 Card payment (Secure link)">💳 Plată cu cardul (Link securizat)</option>
+                            <option value="card" data-ro="💳 Plată cu cardul" data-en="💳 Card payment">💳 Plată cu cardul</option>
                         </select>
 
                         <textarea id="card-message" rows="3" placeholder="Mesaj pentru felicitare / Card message"></textarea>
@@ -1208,7 +1208,7 @@
             
             const methodText = method === 'livrare' ? '✨🛵 Livrare la adresă' : '🛍️ Ridicare personală';
             const addressText = method === 'livrare' ? address : 'Va ridica personal din magazin';
-            const paymentText = payment === 'cash' ? '💵 Numerar' : '💳 Card (Link securizat Stripe)';
+            const paymentText = payment === 'cash' ? '💵 Numerar' : '💳 Card';
             
             let orderText = `✨ *COMANDĂ NOUĂ* ✨\n\n👤 *Client:* ${name}\n📞 *Telefon:* ${phone}\n📦 *Metoda:* ${methodText}\n📍 *Adresa:* ${addressText}\n📅 *Data & Ora:* ${date} la ora ${time}\n💳 *Achitare:* ${paymentText}\n✉️ *Felicitare:* _${document.getElementById('card-message').value || "-"}_{"\n\n🛍 *PRODUSE:*\n"}`;
             
