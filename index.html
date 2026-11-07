@@ -183,15 +183,15 @@
         .faq-answer-clean p { padding: 0 0 25px 0; color: var(--text-light); font-size: 14px; line-height: 1.8; }
 
         /* --- ГАЛЕРЕЯ (ВИДЖЕТ INSTAGRAM) --- */
-        .gallery-section { max-width: 1400px; margin: 80px auto; padding: 0 5%; text-align: center; }
-        .gallery-header { margin-bottom: 40px; }
-        .gallery-header h2 { font-size: 36px; color: var(--text-dark); margin-bottom: 10px; }
-        .gallery-header p { font-size: 15px; color: var(--text-light); font-weight: 400;}
+        .gallery-section { max-width: 1400px; margin: 50px auto 30px; padding: 0 5%; text-align: center; }
+        .gallery-header { margin-bottom: 15px; }
+        .gallery-overline { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); font-weight: 600; margin-bottom: 5px; }
+        .gallery-header h2 { font-size: 32px; color: var(--text-dark); margin: 0; }
         
         .insta-widget-wrapper {
             width: 100%;
             max-width: 1300px;
-            height: 440px;
+            height: 560px;
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
@@ -200,6 +200,7 @@
             width: 100%;
             height: 100%;
             border: 0;
+            overflow: hidden;
         }
 
         /* --- МОДАЛЬНОЕ ОКНО И КОРЗИНА --- */
@@ -361,7 +362,8 @@
             .form-row { flex-direction: column; gap: 15px; }
             .footer-content { flex-direction: column; gap: 30px; }
 
-            .insta-widget-wrapper { height: 360px; }
+            .gallery-header h2 { font-size: 24px; }
+            .insta-widget-wrapper { height: 520px; }
         }
 
         @media (max-width: 500px) {
@@ -372,7 +374,7 @@
             .product-price { font-size: 13px; margin-bottom: 8px;}
             .btn-card { font-size: 11px; padding: 8px; }
             
-            .insta-widget-wrapper { height: 320px; }
+            .insta-widget-wrapper { height: 520px; }
         }
     </style>
 </head>
@@ -559,14 +561,15 @@
     <!-- ГАЛЕРЕЯ INSTAGRAM -->
     <div class="gallery-section reveal" id="gallery">
         <div class="gallery-header">
-            <h2 data-ro="Urmărește-ne" data-en="Follow us">Urmărește-ne</h2>
-            <p data-ro="Ultimele noastre lucrări pe Instagram" data-en="Our latest works on Instagram">Ultimele noastre lucrări pe Instagram</p>
+            <span class="gallery-overline" data-ro="INSTAGRAM @CAB.FLOWERS" data-en="INSTAGRAM @CAB.FLOWERS">INSTAGRAM @CAB.FLOWERS</span>
+            <h2 data-ro="Ultimele noastre lucrări" data-en="Our latest works">Ultimele noastre lucrări</h2>
         </div>
         
         <div class="insta-widget-wrapper">
             <iframe 
                 src="https://rss.app/embed/v1/carousel/WPpJzucQ71hPECkX" 
                 frameborder="0" 
+                scrolling="no"
                 loading="lazy">
             </iframe>
         </div>
