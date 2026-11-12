@@ -19,6 +19,7 @@
             --primary: #c5a059; 
             --primary-hover: #b08d44;
             --accent: #a87b7d; 
+            --accent-hover: #94686a;
             --bg-color: #ffffff;
             --card-bg: #f8f6f3;
             --text-dark: #222222;
@@ -264,6 +265,12 @@
         .footer-map iframe { width: 100%; height: 180px; border-radius: 10px; border: none; }
         .footer-bottom { text-align: center; border-top: 1px solid #333; padding-top: 20px; font-size: 12px; }
 
+        /* Стили для плашек ANPC */
+        .anpc-links { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .anpc-badge { background: #ffffff; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; }
+        .anpc-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15); }
+        .anpc-badge img { height: 42px; width: auto; display: block; object-fit: contain; }
+
         /* Всплывающий Тост (с фиксом черной линии) */
         .toast { 
             position: fixed; 
@@ -364,6 +371,7 @@
 
             .gallery-header h2 { font-size: 24px; }
             .insta-widget-wrapper { height: 520px; }
+            .anpc-badge img { height: 34px; }
         }
 
         @media (max-width: 500px) {
@@ -690,7 +698,29 @@
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; <span id="current-year">2026</span> CAB Flowers Iași. <span data-ro="Toate drepturile rezervate." data-en="All rights reserved.">Toate drepturile rezervate.</span>
+            <div>
+                &copy; <span id="current-year">2026</span> CAB Flowers Iași. <span data-ro="Toate drepturile rezervate." data-en="All rights reserved.">Toate drepturile rezervate.</span>
+            </div>
+
+            <!-- Date legale firmă -->
+            <div class="legal-info" style="font-size: 11px; color: #888; text-align: center; margin-top: 15px; line-height: 1.6;">
+                <p style="margin: 0;">
+                    CAB FLOWERS S.R.L. | CUI: 55414522 | Nr. Reg. Com.: J2026049453009
+                </p>
+                <p style="margin: 0;">
+                    Sediu social: Bdul. Chimiei 4, Iași | Punct de lucru: Str. Mihail Sturza nr. 18, Iași
+                </p>
+            </div>
+
+            <!-- Pictograme obligatorii ANPC (SAL & SOL) -->
+            <div class="anpc-links">
+                <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow" class="anpc-badge" title="Soluționarea Alternativă a Litigiilor">
+                    <img src="sal.png" alt="ANPC - SAL">
+                </a>
+                <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow" class="anpc-badge" title="Soluționarea Online a Litigiilor">
+                    <img src="sol.svg" alt="ANPC - SOL">
+                </a>
+            </div>
         </div>
     </footer>
 
@@ -842,7 +872,12 @@
 
         function filterProducts(category) {
             document.querySelectorAll('.filter-btn-clean').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target && event.target.classList.contains('filter-btn-clean')) {
+                event.target.classList.add('active');
+            } else {
+                const matchingBtn = document.querySelector(`.filter-btn-clean[onclick*="'${category}'"]`);
+                if (matchingBtn) matchingBtn.classList.add('active');
+            }
             
             const grid = document.getElementById('product-grid');
             const prevBtn = document.getElementById('car-prev');
@@ -1065,7 +1100,7 @@
             const addressText = method === 'livrare' ? address : 'Va ridica personal din magazin';
             const paymentText = payment === 'cash' ? '💵 Numerar' : '💳 Card ';
             
-            let orderText = `✨ *COMANDĂ NOUĂ* ✨\n\n👤 *Client:* ${name}\n📞 *Telefon:* ${phone}\n📦 *Metoda:* ${methodText}\n📍 *Adresa:* ${addressText}\n📅 *Data & Ora:* ${date} la ora ${time}\n💳 *Achitare:* ${paymentText}\n✉️ *Felicitare:* _${document.getElementById('card-message').value || "-"}_{"\n\n🛍 *PRODUSE:*\n"}`;
+            let orderText = `✨ *COMANDĂ NOUĂ* ✨\n\n👤 *Client:* ${name}\n📞 *Telefon:* ${phone}\n📦 *Metoda:* ${methodText}\n📍 *Adresa:* ${addressText}\n📅 *Data & Ora:* ${date} la ora ${time}\n💳 *Achitare:* ${paymentText}\n✉️ *Felicitare:* _${document.getElementById('card-message').value || "-"}_\n\n🛍 *PRODUSE:*\n`;
             
             let total = 0;
             cart.forEach(item => {
