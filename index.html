@@ -241,7 +241,7 @@
         /* --- КАТЕГОРИИ --- */
         .categories-circle { padding: 75px 5% 35px; display: flex; justify-content: space-between; max-width: 1350px; margin: 0 auto; gap: 24px; overflow-x: auto; scrollbar-width: none; }
         .categories-circle::-webkit-scrollbar { display: none; }
-        .cat-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; min-width: 140px; group; }
+        .cat-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; min-width: 140px; }
         .cat-img-wrap {
             width: 144px;
             height: 144px;
@@ -509,7 +509,7 @@
 
         .trust-badges { display: flex; justify-content: center; gap: 20px; margin-top: 16px; color: var(--text-light); font-size: 11px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 600; }
 
-        /* --- ФУТЕР --- */
+        /* --- ФУТЕР И ANPC БЕЙДЖИ --- */
         footer { background: var(--black); padding: 75px 5% 30px; color: #a0a0a0; font-size: 13px; }
         .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; max-width: 1200px; margin: 0 auto; margin-bottom: 50px; }
         .footer-col { flex: 1; min-width: 250px; }
@@ -519,6 +519,37 @@
         .footer-col p { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .footer-map iframe { width: 100%; height: 185px; border-radius: 12px; border: 1px solid #2e2e2e; }
         .footer-bottom { text-align: center; border-top: 1px solid #292929; padding-top: 22px; font-size: 12px; }
+
+        /* Светлые капсулы под прозрачные логотипы ANPC (sal.png & sol.svg) */
+        .anpc-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+        .anpc-badge {
+            background: #ffffff;
+            padding: 8px 16px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 54px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .anpc-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.3);
+        }
+        .anpc-badge img {
+            max-height: 38px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
 
         /* Всплывающий Тост */
         .toast { 
@@ -976,13 +1007,13 @@
                 </p>
             </div>
 
-            <!-- Pictograme obligatorii ANPC (SAL & SOL) -->
-            <div class="anpc-links" style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
-                <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow" title="Soluționarea Alternativă a Litigiilor">
-                    <img src="https://anpc.ro/wp-content/uploads/2022/10/sal.png" alt="ANPC - SAL" style="height: 36px; width: auto; display: block; border-radius: 4px;">
+            <!-- Локальные файлы пиктограмм ANPC (sal.png & sol.svg) на аккуратных светлых плашках -->
+            <div class="anpc-links">
+                <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow" class="anpc-badge" title="Soluționarea Alternativă a Litigiilor">
+                    <img src="sal.png" alt="ANPC - SAL">
                 </a>
-                <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow" title="Soluționarea Online a Litigiilor">
-                    <img src="https://anpc.ro/wp-content/uploads/2022/10/sol.png" alt="ANPC - SOL" style="height: 36px; width: auto; display: block; border-radius: 4px;">
+                <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow" class="anpc-badge" title="Soluționarea Online a Litigiilor">
+                    <img src="sol.svg" alt="ANPC - SOL">
                 </a>
             </div>
         </div>
