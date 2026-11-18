@@ -412,26 +412,94 @@
         .faq-answer-clean { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; }
         .faq-answer-clean p { padding: 0 0 25px 0; color: var(--text-light); font-size: 14px; line-height: 1.8; }
 
-        /* --- ГАЛЕРЕЯ (ВИДЖЕТ INSTAGRAM) --- */
+        /* --- ГАЛЕРЕЯ (СЕТКА ФОТО + ЛАЙТБОКС) --- */
         .gallery-section { max-width: 1400px; margin: 50px auto 40px; padding: 0 5%; text-align: center; }
-        .gallery-header { margin-bottom: 22px; }
+        .gallery-header { margin-bottom: 28px; }
         .gallery-overline { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
         .gallery-header h2 { font-size: 34px; color: var(--text-dark); margin: 0; }
         
-        .insta-widget-wrapper {
-            width: 100%;
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
             max-width: 1300px;
-            height: 560px;
             margin: 0 auto;
+        }
+        .insta-card {
+            position: relative;
             border-radius: 16px;
             overflow: hidden;
+            aspect-ratio: 3 / 4;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
         }
-        .insta-widget-wrapper iframe {
+        .insta-card img {
             width: 100%;
             height: 100%;
-            border: 0;
-            overflow: hidden;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
+        .insta-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 12, 10, 0.55) 0%, rgba(15, 12, 10, 0.1) 50%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 18px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .insta-card:hover img { transform: scale(1.06); }
+        .insta-card:hover .insta-overlay { opacity: 1; }
+
+        /* Лайтбокс для просмотра фото галереи */
+        .gallery-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1002;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .gallery-lightbox.open { display: flex; animation: modalIn 0.25s ease; }
+        .gallery-lightbox img {
+            max-width: 92vw;
+            max-height: 88vh;
+            border-radius: 14px;
+            object-fit: contain;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.25);
+            font-size: 26px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+        }
+        .lightbox-close:hover { background: var(--primary); border-color: var(--primary); }
 
         /* --- МОДАЛЬНОЕ ОКНО И КОРЗИНА --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,10,0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 1001; justify-content: center; align-items: center; }
@@ -577,6 +645,7 @@
         @media (max-width: 950px) {
             .grid.grid-mode { grid-template-columns: repeat(3, 1fr); }
             .faq-container { flex-direction: column; gap: 30px; }
+            .insta-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -652,7 +721,7 @@
             .footer-content { flex-direction: column; gap: 30px; }
 
             .gallery-header h2 { font-size: 26px; }
-            .insta-widget-wrapper { height: 520px; }
+            .insta-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
         }
 
         @media (max-width: 500px) {
@@ -662,8 +731,6 @@
             .product-title { font-size: 12.5px; }
             .product-price { font-size: 13.5px; margin-bottom: 10px; }
             .btn-card { font-size: 11px; padding: 9px; }
-            
-            .insta-widget-wrapper { height: 520px; }
         }
     </style>
 </head>
@@ -859,14 +926,50 @@
             <h2 data-ro="Ultimele noastre lucrări" data-en="Our latest works">Ultimele noastre lucrări</h2>
         </div>
         
-        <div class="insta-widget-wrapper">
-            <iframe 
-                src="https://rss.app/embed/v1/carousel/WPpJzucQ71hPECkX" 
-                frameborder="0" 
-                scrolling="no"
-                loading="lazy">
-            </iframe>
+        <div class="insta-grid">
+            <div class="insta-card" onclick="openGalleryLightbox('i1.jpg')">
+                <img src="i1.jpg" alt="CAB Flowers 1" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i2.jpg')">
+                <img src="i2.jpg" alt="CAB Flowers 2" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i3.jpg')">
+                <img src="i3.jpg" alt="CAB Flowers 3" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i4.jpg')">
+                <img src="i4.jpg" alt="CAB Flowers 4" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i5.jpg')">
+                <img src="i5.jpg" alt="CAB Flowers 5" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i6.jpg')">
+                <img src="i6.jpg" alt="CAB Flowers 6" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i7.jpg')">
+                <img src="i7.jpg" alt="CAB Flowers 7" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
+            <div class="insta-card" onclick="openGalleryLightbox('i8.jpg')">
+                <img src="i8.jpg" alt="CAB Flowers 8" loading="lazy">
+                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+            </div>
         </div>
+
+        <div style="margin-top: 32px;">
+            <a href="https://www.instagram.com/cab.flowers?rpxt=MWE1a2N0NmMzMmhvbQ==" target="_blank" class="btn-main" style="text-decoration: none;" data-ro="Urmărește-ne pe Instagram" data-en="Follow us on Instagram">Urmărește-ne pe Instagram</a>
+        </div>
+    </div>
+
+    <!-- Лайтбокс для фото галереи -->
+    <div id="gallery-lightbox" class="gallery-lightbox" onclick="closeGalleryLightbox()">
+        <button class="lightbox-close" onclick="closeGalleryLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="CAB Flowers Full" onclick="event.stopPropagation()">
     </div>
 
     <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
@@ -1239,6 +1342,18 @@
             const message = "Bună, aș dori să primesc o ofertă personalizată pentru evenimentul meu.";
             const whatsappUrl = `https://wa.me/40743560113?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+        }
+
+        // --- ЛАЙТБОКС ГАЛЕРЕИ ---
+        function openGalleryLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('gallery-lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGalleryLightbox() {
+            document.getElementById('gallery-lightbox').classList.remove('open');
+            document.body.style.overflow = '';
         }
 
         let currentModalBasePrice = 0; let currentModalTitle = ""; let currentModalImg = "";
