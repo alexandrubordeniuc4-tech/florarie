@@ -692,49 +692,6 @@
         .cart-item-remove { background: #fff1f2; border: none; color: #e11d48; cursor: pointer; font-size: 16px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
         .cart-item-remove:hover { background: #e11d48; color: #fff; }
 
-        /* Допродажи (Upsell) в корзине */
-        .upsell-box {
-            background: var(--white);
-            border: 1px dashed rgba(197, 160, 89, 0.55);
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 18px;
-        }
-        .upsell-title {
-            font-size: 11.5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        .upsell-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .upsell-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12.5px;
-            padding: 6px 8px;
-            border-radius: 8px;
-            background: var(--card-bg);
-        }
-        .upsell-add-btn {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 16px;
-            padding: 4px 12px;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .upsell-add-btn:hover { background: var(--primary-hover); }
-
         .cart-total-box { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--text-dark); }
         .checkout-box h4 { font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .checkout-form { display: flex; flex-direction: column; gap: 13px; }
@@ -1230,25 +1187,6 @@
                 </div>
 
                 <div id="cart-items" class="cart-items"></div>
-
-                <!-- Блок допродаж (Upsell) -->
-                <div class="upsell-box">
-                    <div class="upsell-title" data-ro="✨ Completează surpriza" data-en="✨ Complete the surprise">✨ Completează surpriza</div>
-                    <div class="upsell-list">
-                        <div class="upsell-item">
-                            <span data-ro="💌 Felicitare caligrafică (15 RON)" data-en="💌 Calligraphic Card (15 RON)">💌 Felicitare caligrafică (15 RON)</span>
-                            <button class="upsell-add-btn" onclick="addUpsellItem('Felicitare caligrafică / Calligraphic Card', 15, 'https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=200')">+ Adaugă</button>
-                        </div>
-                        <div class="upsell-item">
-                            <span data-ro="🍫 Praline belgiene (45 RON)" data-en="🍫 Belgian Pralines (45 RON)">🍫 Praline belgiene (45 RON)</span>
-                            <button class="upsell-add-btn" onclick="addUpsellItem('Praline belgiene / Belgian Pralines', 45, 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=200')">+ Adaugă</button>
-                        </div>
-                        <div class="upsell-item">
-                            <span data-ro="🏺 Vază din sticlă (60 RON)" data-en="🏺 Glass Vase (60 RON)">🏺 Vază din sticlă (60 RON)</span>
-                            <button class="upsell-add-btn" onclick="addUpsellItem('Vază din sticlă / Glass Vase', 60, 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=200')">+ Adaugă</button>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="cart-total-box" style="margin-bottom: 20px;">
                     <span data-ro="Total:" data-en="Total:">Total:</span>
@@ -1789,7 +1727,6 @@
 
         // --- УМНАЯ КОРЗИНА С КОЛИЧЕСТВОМ (QTY) ---
         let rawCart = JSON.parse(localStorage.getItem('cab_flowers_cart') || '[]');
-        // Миграция старых записей без qty
         let cart = rawCart.map(item => ({
             name: item.name,
             price: Number(item.price),
@@ -1851,12 +1788,6 @@
             showToast(textAssets.addedToast[currentLang]);
         }
 
-        function addUpsellItem(title, price, imgSrc) {
-            addItemToCartData(title, price, imgSrc);
-            updateCartUI();
-            showToast(textAssets.addedToast[currentLang]);
-        }
-
         function updateCartUI() {
             const container = document.getElementById('cart-items'); 
             container.innerHTML = ''; 
@@ -1864,7 +1795,7 @@
             let totalCount = 0;
             
             if (cart.length === 0) { 
-                container.innerHTML = `<div style="text-align:center; padding:30px 15px; color:#888;">${textAssets.cartEmpty[currentLang]}</div>`; 
+                container.innerHTML = `<div style="text-align:center; padding:35px 15px; color:#888;">${textAssets.cartEmpty[currentLang]}</div>`; 
             } else {
                 cart.forEach((item, index) => {
                     const subtotal = item.price * item.qty;
