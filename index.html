@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="icon" type="image/png" href="favicon.png.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     
     <!-- SEO-база -->
     <title>CAB Flowers | Florărie Iași | Livrare flori la domiciliu Iași</title>
@@ -258,11 +258,46 @@
         .cat-name { font-size: 14px; font-weight: 600; letter-spacing: 0.3px; color: var(--text-dark); transition: 0.3s; }
         .cat-item:hover .cat-name { color: var(--primary); }
 
-        /* --- ТОВАРЫ --- */
+        /* --- ТОВАРЫ И ПОИСК/СОРТИРОВКА --- */
         .products-section { max-width: 1400px; margin: 40px auto; padding: 0 5%; }
-        .section-header-wrap { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+        .section-header-wrap { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
         .section-header-titles h2 { font-size: 36px; color: var(--text-dark); }
         .section-header-titles p { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--primary); font-weight: 600; margin-bottom: 6px; }
+
+        .catalog-tools {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .catalog-search {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            background: var(--card-bg);
+            outline: none;
+            min-width: 220px;
+            transition: 0.3s;
+        }
+        .catalog-search:focus {
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+        }
+        .catalog-sort {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            background: var(--card-bg);
+            color: var(--text-dark);
+            outline: none;
+            cursor: pointer;
+        }
+        .catalog-sort:focus { border-color: var(--primary); }
         
         .filters-clean { display: flex; gap: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 32px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
         .filters-clean::-webkit-scrollbar { display: none; }
@@ -412,7 +447,7 @@
         .faq-answer-clean { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; }
         .faq-answer-clean p { padding: 0 0 25px 0; color: var(--text-light); font-size: 14px; line-height: 1.8; }
 
-        /* --- ГАЛЕРЕЯ (КАРУСЕЛЬ СО СТРЕЛКАМИ + ЛАЙТБОКС) --- */
+        /* --- ГАЛЕРЕЯ --- */
         .gallery-section { max-width: 1400px; margin: 50px auto 40px; padding: 0 5%; text-align: center; }
         .gallery-header { margin-bottom: 28px; }
         .gallery-overline { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
@@ -477,7 +512,7 @@
         .insta-card:hover img { transform: scale(1.06); }
         .insta-card:hover .insta-overlay { opacity: 1; }
 
-        /* Лайтбокс для просмотра и перелистывания фото галереи */
+        /* Лайтбокс */
         .gallery-lightbox {
             display: none;
             position: fixed;
@@ -551,8 +586,8 @@
             letter-spacing: 1px;
         }
 
-        /* --- МОДАЛЬНОЕ ОКНО И КОРЗИНА --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,10,0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 1001; justify-content: center; align-items: center; }
+        /* --- МОДАЛЬНОЕ ОКНО ТОВАРА И ЮРИДИЧЕСКИЕ ОКНА --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,10,0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 1001; justify-content: center; align-items: center; padding: 15px; }
         .modal-overlay.open { display: flex; }
         .modal-content { background: var(--white); width: 90%; max-width: 860px; border-radius: 18px; display: flex; position: relative; animation: modalIn 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.2); }
         @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -565,12 +600,30 @@
         .modal-desc { font-size: 13.5px; color: var(--text-light); margin-bottom: 24px; line-height: 1.7; }
         .modal-price-display { font-size: 26px; font-weight: 700; color: var(--primary); font-family: 'Montserrat', sans-serif; margin-bottom: 28px; }
 
+        /* Legal Modal */
+        .legal-modal-box {
+            background: var(--white);
+            width: 95%;
+            max-width: 680px;
+            max-height: 82vh;
+            border-radius: 18px;
+            padding: 36px 32px;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+            animation: modalIn 0.3s ease;
+        }
+        .legal-modal-box h3 { font-size: 24px; margin-bottom: 16px; color: var(--text-dark); }
+        .legal-modal-box p, .legal-modal-box li { font-size: 13.5px; color: var(--text-light); line-height: 1.75; margin-bottom: 10px; }
+        .legal-modal-box ul { padding-left: 20px; margin-bottom: 14px; }
+
+        /* --- КОРЗИНА --- */
         .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,10,0.7); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; }
         .cart-modal.open { display: flex; animation: modalIn 0.3s ease; }
         
-        .cart-container { background: var(--white); width: 95%; max-width: 1020px; max-height: 90vh; border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 20px 55px rgba(0,0,0,0.25); position: relative; }
-        .cart-left { flex: 1.15; padding: 40px; background: var(--card-bg); display: flex; flex-direction: column; overflow-y: auto; }
-        .cart-right { flex: 1; padding: 40px; background: var(--white); overflow-y: auto; }
+        .cart-container { background: var(--white); width: 95%; max-width: 1040px; max-height: 90vh; border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 20px 55px rgba(0,0,0,0.25); position: relative; }
+        .cart-left { flex: 1.18; padding: 36px; background: var(--card-bg); display: flex; flex-direction: column; overflow-y: auto; }
+        .cart-right { flex: 1; padding: 36px; background: var(--white); overflow-y: auto; }
         
         .cart-title { font-size: 22px; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -579,7 +632,7 @@
             background: var(--white);
             padding: 12px 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             border: 1px solid var(--border-color);
             font-size: 12px;
             font-weight: 600;
@@ -601,23 +654,92 @@
             transition: width 0.4s ease;
         }
 
-        .cart-items { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .cart-items { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
         
-        /* --- ЭСТЕТИЧНАЯ АНИМАЦИЯ ДЛЯ УДАЛЕНИЯ --- */
-        .cart-item { display: flex; align-items: center; gap: 15px; background: var(--white); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); max-height: 200px; opacity: 1; transform: scale(1); overflow: hidden; }
-        .cart-item.removing { opacity: 0; transform: scale(0.85) translateY(-10px); max-height: 0; padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0; border: none; pointer-events: none; }
+        .cart-item { display: flex; align-items: center; gap: 12px; background: var(--white); padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.25s ease; }
+        .cart-item img { width: 58px; height: 58px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .cart-item-details { flex-grow: 1; min-width: 0; }
+        .cart-item-title { font-size: 13.5px; font-weight: 600; color: var(--text-dark); font-family: 'Montserrat', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cart-item-price { font-weight: 700; color: var(--primary); font-size: 13.5px; margin-top: 2px; }
         
-        .cart-item img { width: 65px; height: 65px; border-radius: 8px; object-fit: cover; }
-        .cart-item-details { flex-grow: 1; }
-        .cart-item-title { font-size: 14px; font-weight: 600; color: var(--text-dark); font-family: 'Montserrat', sans-serif; }
-        .cart-item-price { font-weight: 700; color: var(--primary); font-size: 14.5px; margin-top: 2px; }
-        .cart-item-remove { background: #fff1f2; border: none; color: #e11d48; cursor: pointer; font-size: 18px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        /* Счётчик количества +/- в корзине */
+        .qty-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3px 8px;
+        }
+        .qty-btn {
+            background: none;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .qty-btn:hover { color: var(--primary); }
+        .qty-val { font-size: 12.5px; font-weight: 700; min-width: 14px; text-align: center; }
+
+        .cart-item-remove { background: #fff1f2; border: none; color: #e11d48; cursor: pointer; font-size: 16px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
         .cart-item-remove:hover { background: #e11d48; color: #fff; }
-        .cart-total-box { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--text-dark); }
-        .checkout-box h4 { font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); margin-bottom: 22px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .checkout-form { display: flex; flex-direction: column; gap: 14px; }
+
+        /* Допродажи (Upsell) в корзине */
+        .upsell-box {
+            background: var(--white);
+            border: 1px dashed rgba(197, 160, 89, 0.55);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+        }
+        .upsell-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .upsell-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .upsell-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12.5px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: var(--card-bg);
+        }
+        .upsell-add-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 16px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .upsell-add-btn:hover { background: var(--primary-hover); }
+
+        .cart-total-box { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--text-dark); }
+        .checkout-box h4 { font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .checkout-form { display: flex; flex-direction: column; gap: 13px; }
         
-        .checkout-form input, .checkout-form select, .checkout-form textarea { padding: 13.5px 15px; border: 1px solid var(--border-color); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; outline: none; background: #faf9f6; transition: 0.3s; }
+        .checkout-form input, .checkout-form select, .checkout-form textarea { padding: 13px 15px; border: 1px solid var(--border-color); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; outline: none; background: #faf9f6; transition: 0.3s; }
         .checkout-form input:focus, .checkout-form select:focus, .checkout-form textarea:focus { border-color: var(--primary); background: var(--white); box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12); }
         .form-row { display: flex; gap: 10px; }
         .form-row > * { flex: 1; }
@@ -625,7 +747,7 @@
         .datetime-label { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-light); margin-bottom: 5px; display: block; letter-spacing: 0.5px; }
         .datetime-group { display: flex; flex-direction: column; }
 
-        .trust-badges { display: flex; justify-content: center; gap: 20px; margin-top: 16px; color: var(--text-light); font-size: 11px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        .trust-badges { display: flex; justify-content: center; gap: 20px; margin-top: 14px; color: var(--text-light); font-size: 11px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 600; }
 
         /* --- ФУТЕР И ANPC БЕЙДЖИ --- */
         footer { background: var(--black); padding: 75px 5% 30px; color: #a0a0a0; font-size: 13px; }
@@ -638,7 +760,25 @@
         .footer-map iframe { width: 100%; height: 185px; border-radius: 12px; border: 1px solid #2e2e2e; }
         .footer-bottom { text-align: center; border-top: 1px solid #292929; padding-top: 22px; font-size: 12px; }
 
-        /* Светлые капсулы под прозрачные логотипы ANPC (sal.png & sol.svg) */
+        .legal-links {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .legal-links button {
+            background: none;
+            border: none;
+            color: #999;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11.5px;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.25s;
+        }
+        .legal-links button:hover { color: var(--primary); }
+
         .anpc-links {
             display: flex;
             justify-content: center;
@@ -725,9 +865,11 @@
             .cat-img-wrap { width: 96px; height: 96px; padding: 3px; }
             .cat-name { font-size: 12.5px; }
 
-            .section-header-wrap { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .section-header-wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
             .section-header-titles h2 { font-size: 26px; }
-            .filters-clean { width: 100%; justify-content: flex-start; }
+            .catalog-tools { width: 100%; }
+            .catalog-search, .catalog-sort { flex: 1; min-width: 140px; }
+            .filters-clean { width: 100%; justify-content: flex-start; gap: 22px; }
             .carousel-wrapper .carousel-btn { display: none !important; } 
             
             .features-wrapper { flex-direction: column; margin: 60px 0; }
@@ -750,7 +892,7 @@
             .cart-right { flex: none; padding: 0 20px 100px 20px; background: transparent; overflow-y: visible; }
             
             .cart-title { font-size: 22px; margin-bottom: 15px; }
-            .cart-total-box { margin-top: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+            .cart-total-box { margin-top: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 18px; }
             
             /* Модальное окно товара на мобилках */
             .modal-content { flex-direction: column; width: 92%; max-height: 86vh; overflow-y: auto; }
@@ -889,12 +1031,23 @@
                 <p data-ro="CELE MAI POPULARE BUCHETE" data-en="MOST POPULAR BOUQUETS">CELE MAI POPULARE BUCHETE</p>
                 <h2 data-ro="Alegerea clienților noștri" data-en="Our clients' choice">Alegerea clienților noștri</h2>
             </div>
+
+            <!-- Поиск и сортировка -->
+            <div class="catalog-tools">
+                <input type="text" id="catalog-search" class="catalog-search" placeholder="Caută buchet..." oninput="renderCatalog()">
+                <select id="catalog-sort" class="catalog-sort" onchange="renderCatalog()">
+                    <option value="default" data-ro="Sortare: Recomandate" data-en="Sort: Featured">Sortare: Recomandate</option>
+                    <option value="asc" data-ro="Preț: Mic → Mare" data-en="Price: Low → High">Preț: Mic → Mare</option>
+                    <option value="desc" data-ro="Preț: Mare → Mic" data-en="Price: High → Low">Preț: Mare → Mic</option>
+                </select>
+            </div>
         </div>
         
         <div class="filters-clean">
             <button class="filter-btn-clean active" data-cat="all" onclick="filterProducts('all', this)" data-ro="Toate" data-en="All">Toate</button>
             <button class="filter-btn-clean" data-cat="buchete" onclick="filterProducts('buchete', this)" data-ro="Buchete" data-en="Bouquets">Buchete</button>
             <button class="filter-btn-clean" data-cat="cutii" onclick="filterProducts('cutii', this)" data-ro="Cutii" data-en="Boxes">Cutii</button>
+            <button class="filter-btn-clean" data-cat="favorites" onclick="filterProducts('favorites', this)" data-ro="Favorite ♥" data-en="Favorites ♥">Favorite ♥</button>
         </div>
 
         <div class="carousel-wrapper">
@@ -1028,7 +1181,7 @@
         </div>
     </div>
 
-    <!-- Лайтбокс для фото галереи со стрелками -->
+    <!-- Лайтбокс для фото галереи -->
     <div id="gallery-lightbox" class="gallery-lightbox" onclick="closeGalleryLightbox()">
         <button class="lightbox-close" onclick="closeGalleryLightbox()">&times;</button>
         <button class="lightbox-nav lightbox-prev" onclick="changeLightboxSlide(-1, event)">&#10094;</button>
@@ -1040,7 +1193,7 @@
     <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
     <div id="product-modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal()">×</button>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-img-col"><img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Product Image"></div>
             <div class="modal-details">
                 <h3 id="modal-title">Nume Produs</h3>
@@ -1049,6 +1202,14 @@
                 
                 <button class="btn-main" style="width: 100%; justify-content:center;" onclick="addFromModal(event)" data-ro="Adaugă în Coș" data-en="Add to Cart">Adaugă în Coș</button>
             </div>
+        </div>
+    </div>
+
+    <!-- ЮРИДИЧЕСКОЕ МОДАЛЬНОЕ ОКНО (TERMENI / GDPR / COOKIES) -->
+    <div id="legal-modal" class="modal-overlay" onclick="closeLegalModal(event)">
+        <div class="legal-modal-box" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeLegalModal()">&times;</button>
+            <div id="legal-modal-body"></div>
         </div>
     </div>
 
@@ -1069,7 +1230,27 @@
                 </div>
 
                 <div id="cart-items" class="cart-items"></div>
-                <div class="cart-total-box" style="margin-bottom: 25px;">
+
+                <!-- Блок допродаж (Upsell) -->
+                <div class="upsell-box">
+                    <div class="upsell-title" data-ro="✨ Completează surpriza" data-en="✨ Complete the surprise">✨ Completează surpriza</div>
+                    <div class="upsell-list">
+                        <div class="upsell-item">
+                            <span data-ro="💌 Felicitare caligrafică (15 RON)" data-en="💌 Calligraphic Card (15 RON)">💌 Felicitare caligrafică (15 RON)</span>
+                            <button class="upsell-add-btn" onclick="addUpsellItem('Felicitare caligrafică / Calligraphic Card', 15, 'https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=200')">+ Adaugă</button>
+                        </div>
+                        <div class="upsell-item">
+                            <span data-ro="🍫 Praline belgiene (45 RON)" data-en="🍫 Belgian Pralines (45 RON)">🍫 Praline belgiene (45 RON)</span>
+                            <button class="upsell-add-btn" onclick="addUpsellItem('Praline belgiene / Belgian Pralines', 45, 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=200')">+ Adaugă</button>
+                        </div>
+                        <div class="upsell-item">
+                            <span data-ro="🏺 Vază din sticlă (60 RON)" data-en="🏺 Glass Vase (60 RON)">🏺 Vază din sticlă (60 RON)</span>
+                            <button class="upsell-add-btn" onclick="addUpsellItem('Vază din sticlă / Glass Vase', 60, 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=200')">+ Adaugă</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-total-box" style="margin-bottom: 20px;">
                     <span data-ro="Total:" data-en="Total:">Total:</span>
                     <span><span id="cart-total-value">0</span> RON</span>
                 </div>
@@ -1175,7 +1356,13 @@
                 </p>
             </div>
 
-            <!-- Локальные файлы пиктограмм ANPC (sal.png & sol.svg) на аккуратных светлых плашках -->
+            <!-- Ссылки на обязательные документы (GDPR, Termeni, Cookies) -->
+            <div class="legal-links">
+                <button onclick="openLegalModal('terms')" data-ro="Termeni și Condiții" data-en="Terms & Conditions">Termeni și Condiții</button>
+                <button onclick="openLegalModal('privacy')" data-ro="Politica de Confidențialitate (GDPR)" data-en="Privacy Policy (GDPR)">Politica de Confidențialitate (GDPR)</button>
+                <button onclick="openLegalModal('cookies')" data-ro="Politica de Cookies" data-en="Cookie Policy">Politica de Cookies</button>
+            </div>
+
             <div class="anpc-links">
                 <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow" class="anpc-badge" title="Soluționarea Alternativă a Litigiilor">
                     <img src="sal.png" alt="ANPC - SAL">
@@ -1233,58 +1420,120 @@
             accessToken: ACCESS_TOKEN
         });
 
-        function toggleLike(event, btn) {
+        let allProducts = [];
+        let activeCategory = 'all';
+        let likedProducts = JSON.parse(localStorage.getItem('cab_flowers_likes') || '[]');
+
+        function saveLikes() {
+            localStorage.setItem('cab_flowers_likes', JSON.stringify(likedProducts));
+        }
+
+        function toggleLike(event, id) {
             event.stopPropagation();
-            btn.classList.toggle('liked');
-            btn.innerHTML = btn.classList.contains('liked') ? '♥' : '♡';
+            if (likedProducts.includes(id)) {
+                likedProducts = likedProducts.filter(item => item !== id);
+            } else {
+                likedProducts.push(id);
+            }
+            saveLikes();
+            renderCatalog();
         }
 
         async function loadProductsFromContentful() {
             try {
                 const entries = await client.getEntries({ content_type: 'product' });
-                const grid = document.getElementById('product-grid');
-                grid.innerHTML = ''; 
-
-                entries.items.forEach(item => {
+                allProducts = entries.items.map(item => {
                     const fields = item.fields;
-                    
                     let imgUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; 
                     if (fields.image && fields.image.fields && fields.image.fields.file) {
                         imgUrl = 'https:' + fields.image.fields.file.url;
                     }
-                    
-                    const titleRo = fields.titleRo || 'Fără nume';
-                    const titleEn = fields.titleEn || 'No name';
-                    const price = fields.price || 0;
-                    const category = fields.category || 'buchete';
-
-                    const safeTitleRo = titleRo.replace(/'/g, "\\'");
-                    const safeTitleEn = titleEn.replace(/'/g, "\\'");
-
-                    const cardHtml = `
-                        <div class="product-card" data-category="${category}">
-                            <div class="img-wrapper" onclick="openModal('${safeTitleRo} / ${safeTitleEn}', ${price}, '${imgUrl}')">
-                                <button class="heart-btn" onclick="toggleLike(event, this)">♡</button>
-                                <img src="${imgUrl}" alt="${titleRo}" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <div>
-                                    <h4 class="product-title" data-ro="${titleRo}" data-en="${titleEn}">${titleRo}</h4>
-                                    <p class="product-price">${price} RON</p>
-                                </div>
-                                <button class="btn-card" onclick="quickAddToCart(event, '${safeTitleRo} / ${safeTitleEn}', ${price}, '${imgUrl}')" data-ro="În coș" data-en="Add to cart">În coș</button>
-                            </div>
-                        </div>
-                    `;
-                    grid.innerHTML += cardHtml;
+                    return {
+                        id: item.sys.id,
+                        titleRo: fields.titleRo || 'Fără nume',
+                        titleEn: fields.titleEn || 'No name',
+                        price: Number(fields.price) || 0,
+                        category: fields.category || 'buchete',
+                        imgUrl: imgUrl
+                    };
                 });
 
-                applyTranslations(currentLang);
-
+                renderCatalog();
             } catch (error) {
                 console.error("Ошибка при загрузке каталога:", error);
                 document.getElementById('product-grid').innerHTML = '<p style="padding: 20px;">Eroare la încărcarea catalogului din baza de date.</p>';
             }
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('product-grid');
+            const searchQuery = (document.getElementById('catalog-search')?.value || '').trim().toLowerCase();
+            const sortMode = document.getElementById('catalog-sort')?.value || 'default';
+
+            let filtered = allProducts.filter(p => {
+                const matchesCategory =
+                    activeCategory === 'all' ? true :
+                    activeCategory === 'favorites' ? likedProducts.includes(p.id) :
+                    p.category === activeCategory;
+
+                const matchesSearch =
+                    p.titleRo.toLowerCase().includes(searchQuery) ||
+                    p.titleEn.toLowerCase().includes(searchQuery);
+
+                return matchesCategory && matchesSearch;
+            });
+
+            if (sortMode === 'asc') {
+                filtered = [...filtered].sort((a, b) => a.price - b.price);
+            } else if (sortMode === 'desc') {
+                filtered = [...filtered].sort((a, b) => b.price - a.price);
+            }
+
+            const prevBtn = document.getElementById('car-prev');
+            const nextBtn = document.getElementById('car-next');
+            const isDefaultView = activeCategory === 'all' && !searchQuery && sortMode === 'default';
+
+            if (isDefaultView) {
+                grid.classList.remove('grid-mode');
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            } else {
+                grid.classList.add('grid-mode');
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+
+            if (filtered.length === 0) {
+                const emptyText = currentLang === 'ro'
+                    ? 'Nu am găsit buchete conform filtrelor selectate.'
+                    : 'No bouquets found matching your filters.';
+                grid.innerHTML = `<p style="padding: 30px; color: var(--text-light); width: 100%; text-align: center;">${emptyText}</p>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => {
+                const isLiked = likedProducts.includes(p.id);
+                const safeTitleRo = p.titleRo.replace(/'/g, "\\'");
+                const safeTitleEn = p.titleEn.replace(/'/g, "\\'");
+                const displayTitle = currentLang === 'ro' ? p.titleRo : p.titleEn;
+                const btnText = currentLang === 'ro' ? 'În coș' : 'Add to cart';
+
+                return `
+                    <div class="product-card" data-category="${p.category}">
+                        <div class="img-wrapper" onclick="openModal('${safeTitleRo} / ${safeTitleEn}', ${p.price}, '${p.imgUrl}')">
+                            <button class="heart-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(event, '${p.id}')">${isLiked ? '♥' : '♡'}</button>
+                            <img src="${p.imgUrl}" alt="${p.titleRo}" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <div>
+                                <h4 class="product-title" data-ro="${p.titleRo}" data-en="${p.titleEn}">${displayTitle}</h4>
+                                <p class="product-price">${p.price} RON</p>
+                            </div>
+                            <button class="btn-card" onclick="quickAddToCart(event, '${safeTitleRo} / ${safeTitleEn}', ${p.price}, '${p.imgUrl}')" data-ro="În coș" data-en="Add to cart">${btnText}</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         document.addEventListener('DOMContentLoaded', loadProductsFromContentful);
@@ -1297,6 +1546,7 @@
             placeholderPhone: { ro: "Telefon", en: "Phone Number" },
             placeholderAddress: { ro: "Adresa în Iași", en: "Address in Iași" },
             placeholderMsg: { ro: "Mesaj felicitare", en: "Card message" },
+            placeholderSearch: { ro: "Caută buchet...", en: "Search bouquet..." },
             addedToast: { ro: "✨ Produs adăugat în coș!", en: "✨ Product added to cart!" },
             btnDelivery: { ro: "Trimite Comanda", en: "Submit Order" },
             btnPickup: { ro: "Rezervă și Ridică", en: "Reserve and Pick Up" }
@@ -1314,6 +1564,9 @@
             document.getElementById('phone').placeholder = textAssets.placeholderPhone[lang];
             document.getElementById('address').placeholder = textAssets.placeholderAddress[lang];
             document.getElementById('card-message').placeholder = textAssets.placeholderMsg[lang];
+            if (document.getElementById('catalog-search')) {
+                document.getElementById('catalog-search').placeholder = textAssets.placeholderSearch[lang];
+            }
 
             if (document.getElementById('product-modal').classList.contains('open')) {
                 const fullTitle = document.getElementById('modal-title').getAttribute('data-full-title');
@@ -1357,6 +1610,7 @@
         }
 
         function filterProducts(category, btnEl) {
+            activeCategory = category;
             document.querySelectorAll('.filter-btn-clean').forEach(btn => btn.classList.remove('active'));
             if (btnEl) {
                 btnEl.classList.add('active');
@@ -1365,23 +1619,7 @@
                 if (matchingBtn) matchingBtn.classList.add('active');
             }
             
-            const grid = document.getElementById('product-grid');
-            const prevBtn = document.getElementById('car-prev');
-            const nextBtn = document.getElementById('car-next');
-            
-            if (category === 'all') {
-                grid.classList.remove('grid-mode');
-                prevBtn.style.display = 'flex';
-                nextBtn.style.display = 'flex';
-            } else {
-                grid.classList.add('grid-mode');
-                prevBtn.style.display = 'none';
-                nextBtn.style.display = 'none';
-            }
-
-            document.querySelectorAll('.product-card').forEach(prod => {
-                prod.style.display = (category === 'all' || prod.getAttribute('data-category') === category) ? 'flex' : 'none';
-            });
+            renderCatalog();
             document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -1450,6 +1688,42 @@
             if (e.key === 'Escape') closeGalleryLightbox();
         });
 
+        // --- ЮРИДИЧЕСКИЕ МОДАЛЬНЫЕ ОКНА ---
+        const legalTexts = {
+            terms: `
+                <h3>Termeni și Condiții</h3>
+                <p>Acest site este operat de <strong>CAB FLOWERS S.R.L.</strong>, cu sediul social în Bdul. Chimiei 4, Iași, punct de lucru Str. Mihail Sturza nr. 18, Iași, CUI 55414522, Nr. Reg. Com. J2026049453009.</p>
+                <p><strong>1. Comenzi și Livrare:</strong> Comenzile se plasează online și se confirmă telefonic sau prin WhatsApp. Livrarea în municipiul Iași se efectuează în intervalul 08:00 – 19:00. Pentru comenzile de peste 200 RON, livrarea în Iași este gratuită.</p>
+                <p><strong>2. Natura produselor:</strong> Florile sunt produse perisabile naturale; nuanțele și deschiderea bobocilor pot varia ușor față de fotografiile de prezentare, păstrând însă stilul, valoarea și cromatica compoziției.</p>
+                <p><strong>3. Politica de retur:</strong> Conform OUG 34/2014 art. 16 lit. d), produsele perisabile (flori naturale și aranjamente florale) sunt exceptate de la dreptul de retragere. În cazul oricărei neconformități la livrare, vă rugăm să ne contactați imediat la 0743 560 113 pentru înlocuirea buchetului.</p>
+            `,
+            privacy: `
+                <h3>Politica de Confidențialitate (GDPR)</h3>
+                <p><strong>CAB FLOWERS S.R.L.</strong> respectă confidențialitatea datelor dumneavoastră cu caracter personal în conformitate cu Regulamentul (UE) 2016/679 (GDPR).</p>
+                <p><strong>Ce date colectăm:</strong> Nume, număr de telefon, adresa de livrare și mesajul opțional pentru felicitare, exclusiv în scopul procesării și livrării comenzii dumneavoastră.</p>
+                <p><strong>Drepturile dumneavoastră:</strong> Aveți dreptul de acces, rectificare, ștergere („dreptul de a fi uitat”) sau restricționare a prelucrării datelor. Pentru orice solicitare, ne puteți contacta telefonic la 0743 560 113 sau la punctul de lucru din Str. Mihail Sturza nr. 18, Iași.</p>
+            `,
+            cookies: `
+                <h3>Politica de Cookies</h3>
+                <p>Site-ul CAB Flowers utilizează stocarea locală a browserului (<em>localStorage</em>) exclusiv pentru funcționarea esențială a coșului de cumpărături și salvarea buchetelor favorite între sesiuni.</p>
+                <p>Nu folosim cookie-uri de urmărire publicitară intruzivă. Puteți șterge oricând datele salvate din setările browserului dumneavoastră.</p>
+            `
+        };
+
+        function openLegalModal(type) {
+            document.getElementById('legal-modal-body').innerHTML = legalTexts[type] || '';
+            document.getElementById('legal-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLegalModal(e) {
+            if (!e || e.target.classList.contains('modal-overlay')) {
+                document.getElementById('legal-modal').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- МОДАЛЬНОЕ ОКНО ТОВАРА ---
         let currentModalBasePrice = 0; let currentModalTitle = ""; let currentModalImg = "";
         
         function openModal(title, basePrice, imgSrc) {
@@ -1489,7 +1763,6 @@
             flyingImg.style.pointerEvents = 'none';
             
             document.body.appendChild(flyingImg);
-            
             void flyingImg.offsetWidth;
             
             flyingImg.style.left = (cartRect.left + cartRect.width / 2 - 15) + 'px';
@@ -1514,17 +1787,51 @@
             setTimeout(() => toast.classList.remove('show'), 2800);
         }
 
-        let cart = JSON.parse(localStorage.getItem('cab_flowers_cart') || '[]');
+        // --- УМНАЯ КОРЗИНА С КОЛИЧЕСТВОМ (QTY) ---
+        let rawCart = JSON.parse(localStorage.getItem('cab_flowers_cart') || '[]');
+        // Миграция старых записей без qty
+        let cart = rawCart.map(item => ({
+            name: item.name,
+            price: Number(item.price),
+            img: item.img,
+            qty: item.qty ? Number(item.qty) : 1
+        }));
+        saveCart();
         updateCartUI();
 
         function saveCart() {
             localStorage.setItem('cab_flowers_cart', JSON.stringify(cart));
         }
 
+        function addItemToCartData(name, price, img) {
+            const existingIndex = cart.findIndex(item => item.name === name && item.price === price);
+            if (existingIndex !== -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ name: name, price: price, img: img, qty: 1 });
+            }
+            saveCart();
+        }
+
+        function changeItemQty(index, delta) {
+            if (!cart[index]) return;
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+        }
+
         function quickAddToCart(event, title, price, imgSrc) {
             event.stopPropagation();
-            cart.push({ name: title, price: price, img: imgSrc });
-            saveCart();
+            addItemToCartData(title, price, imgSrc);
 
             const card = event.target.closest('.product-card');
             const imgEl = card ? card.querySelector('img') : event.target;
@@ -1534,8 +1841,7 @@
         }
         
         function addFromModal(event) {
-            cart.push({ name: currentModalTitle, price: currentModalBasePrice, img: currentModalImg });
-            saveCart();
+            addItemToCartData(currentModalTitle, currentModalBasePrice, currentModalImg);
             
             const imgEl = document.getElementById('modal-img');
             const rect = imgEl.getBoundingClientRect();
@@ -1545,42 +1851,38 @@
             showToast(textAssets.addedToast[currentLang]);
         }
 
-        function removeFromCart(index) {
-            const itemsContainer = document.getElementById('cart-items');
-            const itemElement = itemsContainer.children[index];
-            
-            if (itemElement) {
-                itemElement.classList.add('removing');
-                
-                setTimeout(() => {
-                    cart.splice(index, 1);
-                    saveCart();
-                    updateCartUI();
-                }, 300);
-            } else {
-                cart.splice(index, 1);
-                saveCart();
-                updateCartUI();
-            }
+        function addUpsellItem(title, price, imgSrc) {
+            addItemToCartData(title, price, imgSrc);
+            updateCartUI();
+            showToast(textAssets.addedToast[currentLang]);
         }
 
         function updateCartUI() {
             const container = document.getElementById('cart-items'); 
-            container.innerHTML = ''; let total = 0;
+            container.innerHTML = ''; 
+            let total = 0;
+            let totalCount = 0;
             
             if (cart.length === 0) { 
-                container.innerHTML = `<div style="text-align:center; padding:35px 15px; color:#888;">${textAssets.cartEmpty[currentLang]}</div>`; 
+                container.innerHTML = `<div style="text-align:center; padding:30px 15px; color:#888;">${textAssets.cartEmpty[currentLang]}</div>`; 
             } else {
                 cart.forEach((item, index) => {
-                    total += item.price; 
-                    let displayTitle = item.name.split(' / ')[currentLang === 'ro' ? 0 : 1];
+                    const subtotal = item.price * item.qty;
+                    total += subtotal; 
+                    totalCount += item.qty;
+                    let displayTitle = item.name.split(' / ')[currentLang === 'ro' ? 0 : 1] || item.name;
                     
                     container.innerHTML += `
                         <div class="cart-item">
                             <img src="${item.img}" alt="Product">
                             <div class="cart-item-details">
                                 <div class="cart-item-title">${displayTitle}</div>
-                                <div class="cart-item-price">${item.price} RON</div>
+                                <div class="cart-item-price">${subtotal} RON</div>
+                            </div>
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="changeItemQty(${index}, -1)">&minus;</button>
+                                <span class="qty-val">${item.qty}</span>
+                                <button class="qty-btn" onclick="changeItemQty(${index}, 1)">+</button>
                             </div>
                             <button class="cart-item-remove" onclick="removeFromCart(${index})">&times;</button>
                         </div>
@@ -1588,9 +1890,9 @@
                 });
             }
             document.getElementById('cart-total-value').innerText = total; 
-            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('cart-count').innerText = totalCount;
 
-            // Обновление прогресс-бара бесплатной доставки (200 RON)
+            // Прогресс-бар бесплатной доставки (200 RON)
             const fill = document.getElementById('free-shipping-fill');
             const text = document.getElementById('free-shipping-text');
             if (fill && text) {
@@ -1670,8 +1972,9 @@
             let total = 0;
             cart.forEach(item => {
                 const roName = item.name.split(' / ')[0];
-                orderText += `- ${roName} - ${item.price} RON\n`; 
-                total += item.price;
+                const lineTotal = item.price * item.qty;
+                orderText += `- ${item.qty} x ${roName} - ${lineTotal} RON\n`; 
+                total += lineTotal;
             });
             orderText += `\n💰 *TOTAL: ${total} RON*`;
 
