@@ -412,21 +412,37 @@
         .faq-answer-clean { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; }
         .faq-answer-clean p { padding: 0 0 25px 0; color: var(--text-light); font-size: 14px; line-height: 1.8; }
 
-        /* --- ГАЛЕРЕЯ (СЕТКА ФОТО + ЛАЙТБОКС) --- */
+        /* --- ГАЛЕРЕЯ (КАРУСЕЛЬ СО СТРЕЛКАМИ + ЛАЙТБОКС) --- */
         .gallery-section { max-width: 1400px; margin: 50px auto 40px; padding: 0 5%; text-align: center; }
         .gallery-header { margin-bottom: 28px; }
         .gallery-overline { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
         .gallery-header h2 { font-size: 34px; color: var(--text-dark); margin: 0; }
         
-        .insta-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+        .gallery-carousel-wrapper {
+            position: relative;
             max-width: 1300px;
             margin: 0 auto;
         }
+        .gallery-carousel-wrapper .carousel-btn {
+            top: 50%;
+            display: flex !important;
+        }
+        .insta-track {
+            display: flex;
+            gap: 18px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            padding: 6px 2px 12px;
+        }
+        .insta-track::-webkit-scrollbar { display: none; }
+
         .insta-card {
             position: relative;
+            flex: 0 0 calc(25% - 13.5px);
+            min-width: 240px;
+            scroll-snap-align: start;
             border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 3 / 4;
@@ -461,12 +477,12 @@
         .insta-card:hover img { transform: scale(1.06); }
         .insta-card:hover .insta-overlay { opacity: 1; }
 
-        /* Лайтбокс для просмотра фото галереи */
+        /* Лайтбокс для просмотра и перелистывания фото галереи */
         .gallery-lightbox {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(10, 10, 10, 0.88);
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 1002;
@@ -476,18 +492,19 @@
         }
         .gallery-lightbox.open { display: flex; animation: modalIn 0.25s ease; }
         .gallery-lightbox img {
-            max-width: 92vw;
-            max-height: 88vh;
+            max-width: 82vw;
+            max-height: 85vh;
             border-radius: 14px;
             object-fit: contain;
             box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            user-select: none;
         }
         .lightbox-close {
             position: absolute;
             top: 20px;
             right: 24px;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(255,255,255,0.15);
             color: #fff;
@@ -498,8 +515,41 @@
             align-items: center;
             justify-content: center;
             transition: 0.25s;
+            z-index: 5;
         }
         .lightbox-close:hover { background: var(--primary); border-color: var(--primary); }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.16);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.28);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            z-index: 5;
+        }
+        .lightbox-nav:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-50%) scale(1.08); }
+        .lightbox-prev { left: 22px; }
+        .lightbox-next { right: 22px; }
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
         /* --- МОДАЛЬНОЕ ОКНО И КОРЗИНА --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,10,0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 1001; justify-content: center; align-items: center; }
@@ -645,7 +695,7 @@
         @media (max-width: 950px) {
             .grid.grid-mode { grid-template-columns: repeat(3, 1fr); }
             .faq-container { flex-direction: column; gap: 30px; }
-            .insta-grid { grid-template-columns: repeat(3, 1fr); }
+            .insta-card { flex: 0 0 calc(33.333% - 12px); min-width: 210px; }
         }
 
         @media (max-width: 768px) {
@@ -678,7 +728,7 @@
             .section-header-wrap { flex-direction: column; align-items: flex-start; gap: 10px; }
             .section-header-titles h2 { font-size: 26px; }
             .filters-clean { width: 100%; justify-content: flex-start; }
-            .carousel-btn { display: none !important; } 
+            .carousel-wrapper .carousel-btn { display: none !important; } 
             
             .features-wrapper { flex-direction: column; margin: 60px 0; }
             .features-img-side { min-height: 260px; }
@@ -721,7 +771,13 @@
             .footer-content { flex-direction: column; gap: 30px; }
 
             .gallery-header h2 { font-size: 26px; }
-            .insta-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .insta-card { flex: 0 0 calc(50% - 7px); min-width: 165px; }
+            .gallery-carousel-wrapper .carousel-btn { width: 38px; height: 38px; font-size: 15px; }
+            .gallery-carousel-wrapper .carousel-prev { left: -10px; }
+            .gallery-carousel-wrapper .carousel-next { right: -10px; }
+            .lightbox-nav { width: 40px; height: 40px; font-size: 16px; }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
         }
 
         @media (max-width: 500px) {
@@ -926,39 +982,45 @@
             <h2 data-ro="Ultimele noastre lucrări" data-en="Our latest works">Ultimele noastre lucrări</h2>
         </div>
         
-        <div class="insta-grid">
-            <div class="insta-card" onclick="openGalleryLightbox('i1.jpg')">
-                <img src="i1.jpg" alt="CAB Flowers 1" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+        <div class="gallery-carousel-wrapper">
+            <button class="carousel-btn carousel-prev" onclick="scrollGallery(-1)">&#10094;</button>
+            
+            <div class="insta-track" id="gallery-track">
+                <div class="insta-card" onclick="openGalleryLightbox(0)">
+                    <img src="i1.jpg" alt="CAB Flowers 1" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(1)">
+                    <img src="i2.jpg" alt="CAB Flowers 2" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(2)">
+                    <img src="i3.jpg" alt="CAB Flowers 3" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(3)">
+                    <img src="i4.jpg" alt="CAB Flowers 4" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(4)">
+                    <img src="i5.jpg" alt="CAB Flowers 5" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(5)">
+                    <img src="i6.jpg" alt="CAB Flowers 6" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(6)">
+                    <img src="i7.jpg" alt="CAB Flowers 7" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
+                <div class="insta-card" onclick="openGalleryLightbox(7)">
+                    <img src="i8.jpg" alt="CAB Flowers 8" loading="lazy">
+                    <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
+                </div>
             </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i2.jpg')">
-                <img src="i2.jpg" alt="CAB Flowers 2" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i3.jpg')">
-                <img src="i3.jpg" alt="CAB Flowers 3" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i4.jpg')">
-                <img src="i4.jpg" alt="CAB Flowers 4" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i5.jpg')">
-                <img src="i5.jpg" alt="CAB Flowers 5" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i6.jpg')">
-                <img src="i6.jpg" alt="CAB Flowers 6" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i7.jpg')">
-                <img src="i7.jpg" alt="CAB Flowers 7" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
-            <div class="insta-card" onclick="openGalleryLightbox('i8.jpg')">
-                <img src="i8.jpg" alt="CAB Flowers 8" loading="lazy">
-                <div class="insta-overlay"><span data-ro="Mărește" data-en="View">Mărește</span></div>
-            </div>
+
+            <button class="carousel-btn carousel-next" onclick="scrollGallery(1)">&#10095;</button>
         </div>
 
         <div style="margin-top: 32px;">
@@ -966,10 +1028,13 @@
         </div>
     </div>
 
-    <!-- Лайтбокс для фото галереи -->
+    <!-- Лайтбокс для фото галереи со стрелками -->
     <div id="gallery-lightbox" class="gallery-lightbox" onclick="closeGalleryLightbox()">
         <button class="lightbox-close" onclick="closeGalleryLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeLightboxSlide(-1, event)">&#10094;</button>
         <img id="lightbox-img" src="" alt="CAB Flowers Full" onclick="event.stopPropagation()">
+        <button class="lightbox-nav lightbox-next" onclick="changeLightboxSlide(1, event)">&#10095;</button>
+        <div class="lightbox-counter" id="lightbox-counter">1 / 8</div>
     </div>
 
     <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
@@ -1344,17 +1409,46 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // --- ЛАЙТБОКС ГАЛЕРЕИ ---
-        function openGalleryLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
+        // --- КАРУСЕЛЬ И ЛАЙТБОКС ГАЛЕРЕИ ---
+        const galleryImages = ['i1.jpg', 'i2.jpg', 'i3.jpg', 'i4.jpg', 'i5.jpg', 'i6.jpg', 'i7.jpg', 'i8.jpg'];
+        let currentLightboxIndex = 0;
+
+        function scrollGallery(direction) {
+            const track = document.getElementById('gallery-track');
+            const card = track.querySelector('.insta-card');
+            const step = card ? card.offsetWidth + 18 : 300;
+            track.scrollBy({ left: direction * step, behavior: 'smooth' });
+        }
+
+        function openGalleryLightbox(index) {
+            currentLightboxIndex = index;
+            updateLightboxSlide();
             document.getElementById('gallery-lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
+        }
+
+        function changeLightboxSlide(direction, event) {
+            if (event) event.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex + direction + galleryImages.length) % galleryImages.length;
+            updateLightboxSlide();
+        }
+
+        function updateLightboxSlide() {
+            document.getElementById('lightbox-img').src = galleryImages[currentLightboxIndex];
+            document.getElementById('lightbox-counter').innerText = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
         }
 
         function closeGalleryLightbox() {
             document.getElementById('gallery-lightbox').classList.remove('open');
             document.body.style.overflow = '';
         }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('gallery-lightbox').classList.contains('open')) return;
+            if (e.key === 'ArrowRight') changeLightboxSlide(1);
+            if (e.key === 'ArrowLeft') changeLightboxSlide(-1);
+            if (e.key === 'Escape') closeGalleryLightbox();
+        });
 
         let currentModalBasePrice = 0; let currentModalTitle = ""; let currentModalImg = "";
         
